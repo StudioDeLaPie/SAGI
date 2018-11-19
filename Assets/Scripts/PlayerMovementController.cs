@@ -62,7 +62,7 @@ public class PlayerMovementController : MonoBehaviour
     ///
     /// Variables ajoutées au script de base
     ///
-    private PlayerWeight playerWeight;
+    private Weight playerWeight;
     private bool previouslyHadInput;
     [SerializeField, Range(0f, 1f)] private float decelerationPercentage;
 
@@ -86,7 +86,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Capsule = GetComponent<CapsuleCollider>();
-        playerWeight = GetComponent<PlayerWeight>();
+        playerWeight = GetComponent<Weight>();
         mouseLook.Init(transform, cam.transform);
     }
 
