@@ -41,16 +41,52 @@ public class PlayerMovementController : MonoBehaviour
     [Serializable]
     public class AdvancedSettings
     {
-        public float groundCheckDistance = 0.01f; // distance for checking if the controller is grounded ( 0.01f seems to work best for this )
-        public float stickToGroundHelperDistance = 0.5f; // stops the character
+        public float groundRoofCheckDistance = 0.01f; // distance for checking if the controller is grounded ( 0.01f seems to work best for this )
         [Tooltip("set it to 0.1 or more if you get stuck in wall")]
         public float shellOffset; //reduce the radius by that ratio to avoid getting stuck in wall (a value of 0.1f is nice)
+    }
+
+    [Serializable]
+    public class AirControl
+    {
+        public float currentAC;
+
+        [SerializeField] private float maxAC = 100f;
+        [SerializeField] private float useMultiplier = 1f;
+        [SerializeField] private float reloadMultiplier = 20f;
+
+        public AirControl()
+        {
+            currentAC = maxAC;
+        }
+
+        public bool Useable
+        {
+            get
+            {
+                return currentAC > 0;
+            }
+        }
+
+        public void Use()
+        {
+            currentAC -= Time.deltaTime * useMultiplier;
+            if (currentAC < 0)
+                currentAC = 0;
+        }
+
+        public void Reload()
+        {
+            currentAC += Time.deltaTime * 20;
+            if (currentAC > maxAC) currentAC = maxAC;
+        }
     }
 
     public Camera cam;
     public MovementSettings movementSettings = new MovementSettings();
     public MouseLook mouseLook = new MouseLook();
     public AdvancedSettings advancedSettings = new AdvancedSettings();
+    public AirControl airControl = new AirControl();
 
     private Rigidbody m_RigidBody;
     private CapsuleCollider m_Capsule;
@@ -58,13 +94,8 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 m_GroundContactNormal;
     private bool m_Jump, m_PreviouslyGrounded, m_PreviouslyRoofed, m_Jumping, m_IsGrounded, m_IsRoofed;
 
-
-    ///
-    /// Variables ajoutées au script de base
-    ///
     private PlayerWeight playerWeight;
-    private bool previouslyHadInput;
-    [SerializeField, Range(0f, 1f)] private float decelerationPercentage;
+    [SerializeField, Range(0f, 1f)] private float decelerationPercentage = 0.1f;
 
 
     public Vector3 Velocity
@@ -99,7 +130,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             m_Jump = true;
         }
-        //Debug.Log(Velocity);
+        Debug.Log(m_IsGrounded + "    roof : " + m_IsRoofed + "    Air control : " + airControl.currentAC);
     }
 
     private void FixedUpdate()
@@ -110,35 +141,43 @@ public class PlayerMovementController : MonoBehaviour
 
         movementSettings.UpdateDesiredTargetSpeed(input);
 
-        if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon)) //&& (advancedSettings.airControl || m_IsGrounded))
+        if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon))
         {
-            // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
-            desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
-
-            desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
-            desiredMove.y = desiredMove.y * movementSettings.CurrentTargetSpeed;
-            desiredMove.z = desiredMove.z * movementSettings.CurrentTargetSpeed;
-            if (m_RigidBody.velocity.sqrMagnitude <
-                (movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
+            if ((m_IsGrounded || m_IsRoofed) || airControl.Useable)
             {
-                m_RigidBody.AddForce(desiredMove * SlopeMultiplier(), ForceMode.Impulse);
-                //m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);
+                if (!m_IsGrounded && !m_IsRoofed)
+                    airControl.Use(); //Utilisation du air control
 
+                // always move along the camera forward as it is the direction that it being aimed at
+                Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
+                desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
+
+                desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
+                desiredMove.y = desiredMove.y * movementSettings.CurrentTargetSpeed;
+                desiredMove.z = desiredMove.z * movementSettings.CurrentTargetSpeed;
+                if (m_RigidBody.velocity.sqrMagnitude <
+                    (movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
+                {
+                    m_RigidBody.AddForce(desiredMove * SlopeMultiplier(), ForceMode.Impulse);
+                    //m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);
+                }
             }
         }
 
-        if (m_IsGrounded)
+        if (m_IsGrounded || m_IsRoofed)
         {
+            airControl.Reload(); //Rechargement du air control
             if (m_Jump)
             {
                 m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+                if (m_IsGrounded)
+                    m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+                else
+                    m_RigidBody.AddForce(new Vector3(0f, -movementSettings.JumpForce, 0f), ForceMode.Impulse);
                 m_Jumping = true;
             }
         }
         m_Jump = false;
-        previouslyHadInput = Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon;
         ApplyDeceleration(); //Application de la résistance au sol et à l'air
     }
 
@@ -146,22 +185,10 @@ public class PlayerMovementController : MonoBehaviour
     private float SlopeMultiplier()
     {
         float angle = Vector3.Angle(m_GroundContactNormal, Vector3.up);
+        if (m_IsRoofed)
+            angle = Vector3.Angle(m_GroundContactNormal, Vector3.down);
         return movementSettings.SlopeCurveModifier.Evaluate(angle);
     }
-
-    //private void StickToGroundHelper()
-    //{
-    //    RaycastHit hitInfo;
-    //    if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
-    //                           ((m_Capsule.height / 2f) - m_Capsule.radius) +
-    //                           advancedSettings.stickToGroundHelperDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-    //    {
-    //        if (Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up)) < 85f)
-    //        {
-    //            m_RigidBody.velocity = Vector3.ProjectOnPlane(m_RigidBody.velocity, hitInfo.normal);
-    //        }
-    //    }
-    //}
 
     private Vector2 GetInput()
     {
@@ -183,18 +210,22 @@ public class PlayerMovementController : MonoBehaviour
 
         mouseLook.LookRotation(transform, cam.transform);
 
-            // Rotate the rigidbody velocity to match the new direction that the character is looking
-            Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
-            m_RigidBody.velocity = velRotation * m_RigidBody.velocity;
+        // Rotate the rigidbody velocity to match the new direction that the character is looking
+        Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
+        m_RigidBody.velocity = velRotation * m_RigidBody.velocity;
     }
 
     /// sphere cast down just beyond the bottom of the capsule to see if the capsule is colliding round the bottom
     private void GroundAndRoofCheck()
     {
         m_PreviouslyGrounded = m_IsGrounded;
+        m_PreviouslyRoofed = m_IsRoofed;
+
         RaycastHit hitInfo;
+
+        #region GROUND
         if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
-                               ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                               ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundRoofCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
         {
             m_IsGrounded = true;
             m_GroundContactNormal = hitInfo.normal;
@@ -208,17 +239,36 @@ public class PlayerMovementController : MonoBehaviour
         {
             m_Jumping = false;
         }
+        #endregion
+        hitInfo = new RaycastHit();
+        #region ROOF
+        if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.up, out hitInfo,
+                               ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundRoofCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+        {
+            m_IsRoofed = true;
+            m_GroundContactNormal = hitInfo.normal;
+        }
+        else
+        {
+            m_IsRoofed = false;
+            m_GroundContactNormal = Vector3.up;
+        }
+        if (!m_PreviouslyRoofed && m_IsRoofed && m_Jumping)
+        {
+            m_Jumping = false;
+        }
+        #endregion
     }
 
     private void ApplyDeceleration()
     {
-        //if (m_IsGrounded)
-        //    m_RigidBody.velocity *= decelerationPercentage;
-        //else if (advancedSettings.airControl)
-        //{
+        if (m_IsGrounded || m_IsRoofed)
+            m_RigidBody.velocity *= decelerationPercentage;
+        else
+        {
             float y = m_RigidBody.velocity.y;
             m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x * decelerationPercentage, y, m_RigidBody.velocity.z * decelerationPercentage);
-        //}
+        }
     }
 
     /// <summary>
@@ -236,10 +286,4 @@ public class PlayerMovementController : MonoBehaviour
     //    m_RigidBody.AddForce(repulsion, ForceMode.Impulse); //Application de la force
 
     //}
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (!advancedSettings.airControl)
-        //    advancedSettings.airControl = true;
-    }
 }
