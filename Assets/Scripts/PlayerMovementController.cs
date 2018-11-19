@@ -117,7 +117,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Capsule = GetComponent<CapsuleCollider>();
-        playerWeight = GetComponent<PlayerWeight>();
+        playerWeight = GetComponent<Weight>();
         mouseLook.Init(transform, cam.transform);
     }
 
@@ -178,7 +178,7 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
         m_Jump = false;
-        ApplyDeceleration(); //Application de la résistance au sol et à l'air
+        ApplyDeceleration(); //Application de la rï¿½sistance au sol et ï¿½ l'air
     }
 
 
@@ -272,7 +272,7 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     /// <summary>
-    /// Demande au contrôleur de s'appliquer une force d'éjection dans la direction donnée 
+    /// Demande au contrï¿½leur de s'appliquer une force d'ï¿½jection dans la direction donnï¿½e
     /// </summary>
     //[ClientRpc]
     //public void RpcRepulsion(Vector3 playerPosition, Vector3 hitPosition)
@@ -281,7 +281,7 @@ public class PlayerMovementController : MonoBehaviour
     //    repulsion *= movementSettings.JumpForce; //force horizontale
     //    repulsion += Vector3.up * movementSettings.JumpForce; //force verticale
 
-    //    advancedSettings.airControl = false; //désactivation du airControl jusqu'à collision avec autre chose
+    //    advancedSettings.airControl = false; //dï¿½sactivation du airControl jusqu'ï¿½ collision avec autre chose
     //    m_RigidBody.velocity = Vector3.zero;
     //    m_RigidBody.AddForce(repulsion, ForceMode.Impulse); //Application de la force
 

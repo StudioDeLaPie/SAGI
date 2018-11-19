@@ -12,6 +12,7 @@ public class MaterialManager : MonoBehaviour
     private void Start()
     {
         Initialisation();
+        UpdateMaterial();
     }
     
     private void Initialisation()
@@ -25,13 +26,24 @@ public class MaterialManager : MonoBehaviour
         materials.Add(3, Resources.Load(pathMaterials + "CubeFige") as Material);       
     }
 
-    public void ChangePoid(int etat)
+    private void ChangeWeight(int etat)
     {
         GetComponent<MeshRenderer>().material = materials[etat];        
     }
 
-    public void Fige()
+    private void Freeze()
     {
         GetComponent<MeshRenderer>().materials[0] = Resources.Load(pathMaterials + "CubeFige") as Material;
+    }
+
+    public void UpdateMaterial()
+    {
+        if(GetComponent<Rigidbody>().isKinematic)
+        {
+            Freeze();
+            return;
+        }        
+
+        ChangeWeight(GetComponent<Weight>().CurrentWeight);        
     }
 }

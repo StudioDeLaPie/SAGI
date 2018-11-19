@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerWeight : MonoBehaviour
+public class Weight : MonoBehaviour
 {
     private int maxWeight = 2;
     private int minWeight = -2;
     [SerializeField] private float weightMultiplier = 200;
 
     //ConnectionPlayer connectionPlayer;
-    [SerializeField] private int weight; //syncvar
+
+    [SerializeField, Range(-2, 2)] private int currentWeight; //syncvar
     [SerializeField] private Text txtWeight;
     private Rigidbody rb;
 
-    public float Weight
+    public int CurrentWeight
     {
         get
         {
-            return weight;
+            return currentWeight;
         }
     }
 
@@ -37,25 +38,16 @@ public class PlayerWeight : MonoBehaviour
     //[ServerCallback]
     void OnEnable()
     {
-        weight = maxWeight / 2;
+        if(gameObject.tag == "Player")
+            currentWeight = 2;
+            
         RpcUpdateDisplay();
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            IncreaseWeight();
-        }
-        if (Input.GetButtonDown("Fire2"))
-        {
-            DecreaseWeight();
-        }
-    }
 
     private void FixedUpdate()
     {
-        rb.AddForce(0, -(weight * weightMultiplier), 0);
+        rb.AddForce(0, -(currentWeight * weightMultiplier), 0);
     }
 
     public void IncreaseWeight()
@@ -68,10 +60,16 @@ public class PlayerWeight : MonoBehaviour
         ChangeWeight(false);
     }
 
+    public void ZeroGravity()
+    {
+        currentWeight = 0;
+        RpcUpdateDisplay();
+    }
+
     private void ChangeWeight(bool positively)
     {
-        weight = positively ? weight + 1 : weight - 1;
-        weight = Mathf.Clamp(weight, minWeight, maxWeight);
+        currentWeight = positively ? currentWeight + 1 : currentWeight - 1;
+        currentWeight = Mathf.Clamp(currentWeight, minWeight, maxWeight);
         RpcUpdateDisplay();
     }
 
@@ -94,8 +92,11 @@ public class PlayerWeight : MonoBehaviour
     //[ClientRpc]
     void RpcUpdateDisplay()
     {
-        txtWeight.text = weight.ToString();
+        if(gameObject.transform.tag == "Player")
+        txtWeight.text = currentWeight.ToString();
         //if (died)
         //    connectionPlayer.Die();
     }
+
+
 }
