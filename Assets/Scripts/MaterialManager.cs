@@ -20,7 +20,7 @@ public class MaterialManager : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         UpdateMaterial();
     }
-    
+
     private void Initialisation()
     {
         materials = new Dictionary<int, Material>();
@@ -29,12 +29,12 @@ public class MaterialManager : MonoBehaviour
         materials.Add(-0, Resources.Load(pathMaterials + "Cube0") as Material);
         materials.Add(1, Resources.Load(pathMaterials + "Cube1") as Material);
         materials.Add(2, Resources.Load(pathMaterials + "Cube2") as Material);
-        materials.Add(3, Resources.Load(pathMaterials + "CubeFige") as Material);       
+        materials.Add(3, Resources.Load(pathMaterials + "CubeFige") as Material);
     }
 
     private void ChangeWeight(int etat)
     {
-        renderer.material = materials[etat];        
+        renderer.material = materials[etat];
     }
 
     private void Freeze()
@@ -44,12 +44,13 @@ public class MaterialManager : MonoBehaviour
 
     public void UpdateMaterial()
     {
-        if(rigidbody.isKinematic)
+        if (rigidbody.isKinematic)
         {
             Freeze();
-            return;
-        }        
-
-        ChangeWeight(weight.CurrentWeight);        
+        }
+        else
+        {
+            ChangeWeight(weight.CurrentWeight);
+        }
     }
 }

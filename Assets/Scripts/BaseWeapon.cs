@@ -57,8 +57,9 @@ public class BaseWeapon : MonoBehaviour
                 else
                     touchedObject.DecreaseWeight();
 
-                if (touchedObject.transform.tag == "Cube")
-                    touchedObject.GetComponent<MaterialManager>().UpdateMaterial();
+                MaterialManager cube = touchedObject.GetComponent<MaterialManager>();
+                if (cube != null)
+                    cube.UpdateMaterial();
             }
         }
 
@@ -81,8 +82,9 @@ public class BaseWeapon : MonoBehaviour
                 touchedObject.GetComponent<Rigidbody>().velocity = Vector3.zero; //Stop son mouvement
                 touchedObject.ZeroGravity(); //Fixe son poids à 0
 
-                if (touchedObject.transform.tag == "Cube")
-                    touchedObject.GetComponent<MaterialManager>().UpdateMaterial();
+                MaterialManager cube = touchedObject.GetComponent<MaterialManager>();
+                if (cube != null)
+                    cube.UpdateMaterial();
             }
         }
         lastShot = Time.time;
@@ -102,8 +104,9 @@ public class BaseWeapon : MonoBehaviour
                 hit.collider.GetComponent<Rigidbody>().isKinematic = true; //Freeze l'objet
                 touchedObject.ZeroGravity(); //Met son poids à zero
 
-                if (touchedObject.transform.tag == "Cube")
-                    touchedObject.GetComponent<MaterialManager>().UpdateMaterial();
+                MaterialManager cube = touchedObject.GetComponent<MaterialManager>();
+                if (cube != null)
+                    cube.UpdateMaterial();
             }
         }
         lastShot = Time.time;
