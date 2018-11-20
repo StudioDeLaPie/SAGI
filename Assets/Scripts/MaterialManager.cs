@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class MaterialManager : MonoBehaviour
 {
-    public Dictionary<int, Material> materials;
-    string pathMaterials = "Materials/Cubes/";
+    private Dictionary<int, Material> materials;
+    private string pathMaterials = "Materials/Cubes/";
+    private Weight weight;
+    private new MeshRenderer renderer;
+    private new Rigidbody rigidbody;
 
 
     private void Start()
     {
         Initialisation();
+        weight = GetComponent<Weight>();
+        renderer = GetComponent<MeshRenderer>();
+        rigidbody = GetComponent<Rigidbody>();
         UpdateMaterial();
     }
     
@@ -28,22 +34,22 @@ public class MaterialManager : MonoBehaviour
 
     private void ChangeWeight(int etat)
     {
-        GetComponent<MeshRenderer>().material = materials[etat];        
+        renderer.material = materials[etat];        
     }
 
     private void Freeze()
     {
-        GetComponent<MeshRenderer>().materials[0] = Resources.Load(pathMaterials + "CubeFige") as Material;
+        renderer.material = materials[3];
     }
 
     public void UpdateMaterial()
     {
-        if(GetComponent<Rigidbody>().isKinematic)
+        if(rigidbody.isKinematic)
         {
             Freeze();
             return;
         }        
 
-        ChangeWeight(GetComponent<Weight>().CurrentWeight);        
+        ChangeWeight(weight.CurrentWeight);        
     }
 }

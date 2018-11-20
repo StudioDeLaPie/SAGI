@@ -52,8 +52,8 @@ public class PlayerMovementController : MonoBehaviour
         public float currentAC;
 
         [SerializeField] private float maxAC = 100f;
-        [SerializeField] private float useMultiplier = 1f;
-        [SerializeField] private float reloadMultiplier = 20f;
+        [SerializeField] private float useMultiplier = 10f;
+        [SerializeField] private float reloadMultiplier = 150f;
 
         public AirControl()
         {
@@ -77,7 +77,7 @@ public class PlayerMovementController : MonoBehaviour
 
         public void Reload()
         {
-            currentAC += Time.deltaTime * 20;
+            currentAC += Time.deltaTime * reloadMultiplier;
             if (currentAC > maxAC) currentAC = maxAC;
         }
     }
@@ -94,7 +94,7 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 m_GroundContactNormal;
     private bool m_Jump, m_PreviouslyGrounded, m_PreviouslyRoofed, m_Jumping, m_IsGrounded, m_IsRoofed;
 
-    private PlayerWeight playerWeight;
+    private Weight playerWeight;
     [SerializeField, Range(0f, 1f)] private float decelerationPercentage = 0.1f;
 
 
@@ -130,7 +130,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             m_Jump = true;
         }
-        Debug.Log(m_IsGrounded + "    roof : " + m_IsRoofed + "    Air control : " + airControl.currentAC);
+        //Debug.Log(m_IsGrounded + "    roof : " + m_IsRoofed + "    Air control : " + airControl.currentAC);
     }
 
     private void FixedUpdate()
@@ -224,8 +224,10 @@ public class PlayerMovementController : MonoBehaviour
         RaycastHit hitInfo;
 
         #region GROUND
+        //if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
+        //                       ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundRoofCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
         if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
-                               ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundRoofCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+            ((m_Capsule.height / 2f) - m_Capsule.radius) + advancedSettings.groundRoofCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
         {
             m_IsGrounded = true;
             m_GroundContactNormal = hitInfo.normal;
@@ -272,7 +274,7 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     /// <summary>
-    /// Demande au contr�leur de s'appliquer une force d'�jection dans la direction donn�e
+    /// Demande au controleur de s'appliquer une force d'ejection dans la direction donnee
     /// </summary>
     //[ClientRpc]
     //public void RpcRepulsion(Vector3 playerPosition, Vector3 hitPosition)
@@ -286,4 +288,13 @@ public class PlayerMovementController : MonoBehaviour
     //    m_RigidBody.AddForce(repulsion, ForceMode.Impulse); //Application de la force
 
     //}
+
+    private void OnCollisionStay(Collision collision)
+    {
+        for (int i = 0; i < collision.contacts.Length; i++)
+        {
+            Debug.Log(Time.deltaTime);
+            Debug.DrawRay(collision.contacts[i].point, collision.contacts[i].normal, Color.blue, 2);
+        }
+    }
 }

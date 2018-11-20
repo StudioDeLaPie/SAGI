@@ -38,12 +38,22 @@ public class Weight : MonoBehaviour
     //[ServerCallback]
     void OnEnable()
     {
-        if(gameObject.tag == "Player")
+        if (gameObject.tag == "Player")
             currentWeight = 2;
-            
+
         RpcUpdateDisplay();
     }
 
+    private void Update()
+    {
+        if (gameObject.tag == "Player")
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+                ChangeWeight(true);
+            else if (Input.GetKeyDown(KeyCode.G))
+                ChangeWeight(false);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -92,8 +102,8 @@ public class Weight : MonoBehaviour
     //[ClientRpc]
     void RpcUpdateDisplay()
     {
-        if(gameObject.transform.tag == "Player")
-        txtWeight.text = currentWeight.ToString();
+        if (gameObject.transform.tag == "Player")
+            txtWeight.text = currentWeight.ToString();
         //if (died)
         //    connectionPlayer.Die();
     }
