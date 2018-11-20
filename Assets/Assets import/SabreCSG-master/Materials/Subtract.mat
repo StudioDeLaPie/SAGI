@@ -24,6 +24,6 @@ Material:
     - _GridSize: 0.5
     - _GridStrength: 0.3
     - _GridThickness: 0.03
-    - _GridToggle: 0
+    - _GridToggle: 1
     m_Colors:
     - _Color: {r: 1, g: 0.6431373, b: 0, a: 0.2}
