@@ -83,6 +83,28 @@ public class Weight : MonoBehaviour
         RpcUpdateDisplay();
     }
 
+    /// <summary>
+    /// Demande a l'entite de s'appliquer une force d'ejection dans la direction donnee
+    /// </summary>
+    //[ClientRpc]
+    public void Repulsion(Vector3 hitNormal)
+    {
+        AttractionRepulsion(hitNormal, false);
+    }
+
+    public void Attraction(Vector3 hitNormal)
+    {
+        AttractionRepulsion(hitNormal, true);
+    }
+
+    private void AttractionRepulsion(Vector3 hitNormal, bool isAttracting)
+    {
+        hitNormal = isAttracting ? hitNormal* 150f : hitNormal * -150f; //force de propulsion
+
+        rb.velocity = Vector3.zero;
+        rb.AddForce(hitNormal, ForceMode.Impulse); //Application de la force
+    }
+
     //[Server]
     //public void TakeDamage(float balDamage)
     //{

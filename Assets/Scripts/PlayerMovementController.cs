@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementController : MonoBehaviour
@@ -40,6 +40,9 @@ public class PlayerMovementController : MonoBehaviour
         [SerializeField] private float maxAC = 100f;
         [SerializeField] private float useMultiplier = 10f;
         [SerializeField] private float reloadMultiplier = 150f;
+        private bool disabled = false;
+        private float disablingTime;
+        private float disabledFor;
 
         public AirControl()
         {
@@ -54,6 +57,17 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
+        public bool Disabled
+        {
+            get
+            {
+                if (disabled)
+                    if (Time.time > disablingTime + disabledFor) //Si il a été désactivé pour le temps voulu, il se réactive
+                        disabled = false;
+                return disabled;
+            }
+        }
+
         public void Use()
         {
             currentAC -= Time.deltaTime * useMultiplier;
@@ -65,6 +79,19 @@ public class PlayerMovementController : MonoBehaviour
         {
             currentAC += Time.deltaTime * reloadMultiplier;
             if (currentAC > maxAC) currentAC = maxAC;
+        }
+
+        public void Enable()
+        {
+            disabledFor = 0;
+            disabled = false;
+        }
+
+        public void Disable(float time = 0)
+        {
+            disabled = true;
+            disablingTime = Time.time;
+            disabledFor = time;
         }
     }
 
@@ -109,7 +136,7 @@ public class PlayerMovementController : MonoBehaviour
 
         if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon))
         {
-            if ((m_IsGrounded || m_IsRoofed) || airControl.Useable)
+            if (((m_IsGrounded || m_IsRoofed) || airControl.Useable) && !airControl.Disabled)
             {
                 if (!m_IsGrounded && !m_IsRoofed)
                     airControl.Use(); //Utilisation du air control
@@ -169,20 +196,38 @@ public class PlayerMovementController : MonoBehaviour
 
         mouseLook.LookRotation(transform, cam.transform);
 
-        // Rotate the rigidbody velocity to match the new direction that the character is looking
-        Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
-        m_RigidBody.velocity = velRotation * m_RigidBody.velocity;
+        if (!airControl.Disabled)
+        {
+            // Rotate the rigidbody velocity to match the new direction that the character is looking
+            Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
+            m_RigidBody.velocity = velRotation * m_RigidBody.velocity;
+        }
     }
 
     private void ApplyDeceleration()
     {
-        if ((m_IsGrounded || m_IsRoofed || m_Jumpable) && !m_Jumping)
-            m_RigidBody.velocity *= decelerationPercentage;
-        else
+        if (!airControl.Disabled)
         {
-            float yAxisVelocity = m_RigidBody.velocity.y;
-            m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x * decelerationPercentage, yAxisVelocity, m_RigidBody.velocity.z * decelerationPercentage);
+            if ((m_IsGrounded || m_IsRoofed || m_Jumpable) && !m_Jumping)
+                m_RigidBody.velocity *= decelerationPercentage;
+            else
+            {
+                float yAxisVelocity = m_RigidBody.velocity.y;
+                m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x * decelerationPercentage, yAxisVelocity, m_RigidBody.velocity.z * decelerationPercentage);
+            }
         }
+    }
+
+    public void DisableAirControl(float time)
+    {
+        if (playerWeight.CurrentWeight == 0)
+            time = Mathf.Infinity;
+        airControl.Disable(time);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        airControl.Enable();
     }
 
     private void OnCollisionStay(Collision collision)
@@ -213,8 +258,8 @@ public class PlayerMovementController : MonoBehaviour
                     case "Jumpable":
                         //if ((playerWeight.CurrentWeight >= 0 && Vector3.Angle(Vector3.up, normal) < 40f) || (playerWeight.CurrentWeight <= 0 && Vector3.Angle(Vector3.down, normal) < 40f))
                         //{
-                            //Debug.Log("On peut sauter  " + Vector3.Angle(Vector3.up, normal));
-                            m_Jumpable = true;
+                        //Debug.Log("On peut sauter  " + Vector3.Angle(Vector3.up, normal));
+                        m_Jumpable = true;
                         //}
                         break;
                 }
@@ -265,21 +310,5 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// Demande au controleur de s'appliquer une force d'ejection dans la direction donnee
-    /// </summary>
-    //[ClientRpc]
-    //public void RpcRepulsion(Vector3 playerPosition, Vector3 hitPosition)
-    //{
-    //    Vector3 repulsion = Vector3.ProjectOnPlane((hitPosition - playerPosition), Vector3.up).normalized; //direction
-    //    repulsion *= movementSettings.JumpForce; //force horizontale
-    //    repulsion += Vector3.up * movementSettings.JumpForce; //force verticale
-
-    //    advancedSettings.airControl = false; //d�sactivation du airControl jusqu'� collision avec autre chose
-    //    m_RigidBody.velocity = Vector3.zero;
-    //    m_RigidBody.AddForce(repulsion, ForceMode.Impulse); //Application de la force
-
-    //}
 
 }
