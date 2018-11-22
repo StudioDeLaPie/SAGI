@@ -6,7 +6,7 @@ public class Goal : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Cube")
+        if (other.tag == "Jumpable")
         {
             GameObject.FindWithTag("GameManager").GetComponent<GameManager>().loadNextLevel();
         }
