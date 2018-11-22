@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-    int currentLevel = 1;
+    private int currentLevel = 1;
+    private string nameSceneSolo    = "Level";
+    private string nameSceneMulti   = "LevelMulti";
+
+    [SerializeField] private bool multi = false;
 
     private void Start()
     {
@@ -14,7 +18,11 @@ public class GameManager : MonoBehaviour {
     public void loadNextLevel()
     {
         int temp = currentLevel + 1;
-        SceneManager.LoadScene("Level" + temp);
+        if(multi)
+            SceneManager.LoadScene(nameSceneMulti + temp);
+        else
+            SceneManager.LoadScene(nameSceneSolo + temp);
+
         currentLevel++;
     }
 }
