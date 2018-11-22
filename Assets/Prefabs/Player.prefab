@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 223172501510752146}
   - component: {fileID: 114771350081426310}
   - component: {fileID: 114523092457286576}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396602368286098}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4536600789463092}
   - component: {fileID: 20481984945253466}
   - component: {fileID: 81657797945021030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 224753285817650846}
   - component: {fileID: 222658139524866036}
   - component: {fileID: 114918570732562654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: txt_Poids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,13 +88,13 @@ GameObject:
   - component: {fileID: 4853320054252494}
   - component: {fileID: 33161988385940896}
   - component: {fileID: 23048137327120458}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1285553170138938
 GameObject:
   m_ObjectHideFlags: 1
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4271358718955198}
   - component: {fileID: 33262565603270004}
   - component: {fileID: 23440253660193286}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lunettes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4580886654752152}
   - component: {fileID: 33446173129871424}
   - component: {fileID: 23475287180452444}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4262857578425062}
   - component: {fileID: 33255043826070834}
   - component: {fileID: 23100831116062346}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ReacteurGauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,11 +156,14 @@ GameObject:
   - component: {fileID: 4537352946758922}
   - component: {fileID: 54444052200642520}
   - component: {fileID: 136769682127500270}
-  - component: {fileID: 114737472742458086}
-  - component: {fileID: 114484336344930586}
-  - component: {fileID: 114055166307702812}
-  - component: {fileID: 114638844588926392}
-  m_Layer: 0
+  - component: {fileID: 114671201758296404}
+  - component: {fileID: 114700656207540720}
+  - component: {fileID: 114383968687269950}
+  - component: {fileID: 114244898781186382}
+  - component: {fileID: 114977343535061264}
+  - component: {fileID: 114490927797598898}
+  - component: {fileID: 114874330557332906}
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -177,7 +180,7 @@ GameObject:
   - component: {fileID: 4909087396969908}
   - component: {fileID: 33746300337870464}
   - component: {fileID: 23479151543974926}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ReacteurDroit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +197,7 @@ GameObject:
   - component: {fileID: 224639913974382568}
   - component: {fileID: 222906304986850638}
   - component: {fileID: 114493677484036444}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Reticule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417631472413956}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 11, z: 9}
+  m_LocalPosition: {x: 2.3454666, y: -1.6083788e-17, z: 4.346096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4580886654752152}
@@ -585,20 +588,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1248170145769092}
   m_Enabled: 1
---- !u!114 &114055166307702812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1417631472413956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af436bd1f7a27048b910dff5d299d56, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  cooldown: 0.1
-  firePoint: {fileID: 4396602368286098}
---- !u!114 &114323809737939228
+--- !u!114 &114244898781186382
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -607,12 +597,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5744e8ea2d61ad2499cf01c39d30f811, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   firePoint: {fileID: 4396602368286098}
   prefabFaceOverlay: {fileID: 1135376714448996, guid: 0bb976a12457ac547b1bf4554dffdbca,
     type: 2}
---- !u!114 &114484336344930586
+--- !u!114 &114383968687269950
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -620,12 +610,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1417631472413956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dd90018361968d4e8591a1aa80e1237, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  weightMultiplier: 200
-  currentWeight: 2
-  txtWeight: {fileID: 114918570732562654}
+  m_Script: {fileID: 11500000, guid: 4af436bd1f7a27048b910dff5d299d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0.1
+  firePoint: {fileID: 4396602368286098}
+--- !u!114 &114490927797598898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417631472413956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.071428575
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114493677484036444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -635,8 +645,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
@@ -662,28 +672,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114611085942613536
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1417631472413956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5744e8ea2d61ad2499cf01c39d30f811, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  firePoint: {fileID: 4396602368286098}
-  prefabFaceOverlay: {fileID: 1135376714448996, guid: 0bb976a12457ac547b1bf4554dffdbca,
-    type: 2}
---- !u!114 &114737472742458086
+--- !u!114 &114671201758296404
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -692,8 +688,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19bf1699ef607d049b4e2268a64fb765, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   cam: {fileID: 20481984945253466}
   movementSettings:
     ForwardSpeed: 80
@@ -713,6 +709,20 @@ MonoBehaviour:
     useMultiplier: 10
     reloadMultiplier: 150
   decelerationPercentage: 0.1
+--- !u!114 &114700656207540720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417631472413956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd90018361968d4e8591a1aa80e1237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightMultiplier: 200
+  currentWeight: 0
+  txtWeight: {fileID: 114918570732562654}
 --- !u!114 &114771350081426310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -722,8 +732,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -734,7 +744,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114801690334425082
+--- !u!114 &114874330557332906
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -743,8 +753,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff8d877a1b2833c4997f4b0785b9926a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   onToggleShared:
     m_PersistentCalls:
       m_Calls:
@@ -756,10 +766,10 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114484336344930586}
+      - m_Target: {fileID: 114700656207540720}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -767,14 +777,14 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   onToggleLocal:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114055166307702812}
+      - m_Target: {fileID: 114383968687269950}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -782,10 +792,10 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114323809737939228}
+      - m_Target: {fileID: 114244898781186382}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -793,7 +803,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1248170145769092}
@@ -804,7 +814,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1119966564572472}
@@ -815,13 +825,24 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument:
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   onToggleRemote:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1327114488189348}
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   respawnTime: 5
 --- !u!114 &114918570732562654
@@ -833,8 +854,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
@@ -857,7 +878,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: text
---- !u!114 &114967821815244752
+--- !u!114 &114977343535061264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -866,8 +887,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_SceneId:
     m_Value: 0
   m_AssetId:

@@ -16,16 +16,16 @@ public class ConnectionPlayer : NetworkBehaviour
 
     void Start()
     {
-        if (isLocalPlayer)
+        /*if (isLocalPlayer)
             mainCamera = Camera.main.gameObject;
-
+            */
         EnablePlayer();
     }
 
     void DisablePlayer()
     {
-        if (isLocalPlayer)
-            mainCamera.SetActive(true);
+        //if (isLocalPlayer)
+            //mainCamera.SetActive(true);
 
         onToggleShared.Invoke(false);
 
@@ -37,8 +37,8 @@ public class ConnectionPlayer : NetworkBehaviour
 
     void EnablePlayer()
     {
-        if (isLocalPlayer)
-            mainCamera.SetActive(false);
+        //if (isLocalPlayer)
+            //mainCamera.SetActive(false);
 
         onToggleShared.Invoke(true);
 

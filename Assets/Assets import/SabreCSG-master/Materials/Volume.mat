@@ -21,9 +21,9 @@ Material:
     m_Floats:
     - _FaceToggle: 1
     - _GridAlpha: 0.3
-    - _GridSize: 0.5
+    - _GridSize: 1
     - _GridStrength: 0.3
     - _GridThickness: 0.03
-    - _GridToggle: 1
+    - _GridToggle: 0
     m_Colors:
     - _Color: {r: 0.9411765, g: 0.9019608, b: 0.54901963, a: 0.2}
