@@ -40,7 +40,7 @@ GameObject:
   m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -159,6 +159,10 @@ GameObject:
   - component: {fileID: 114737472742458086}
   - component: {fileID: 114484336344930586}
   - component: {fileID: 114055166307702812}
+  - component: {fileID: 114323809737939228}
+  - component: {fileID: 114967821815244752}
+  - component: {fileID: 114801690334425082}
+  - component: {fileID: 114611085942613536}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -233,7 +237,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1181000960740334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.153}
+  m_LocalPosition: {x: 0, y: 0, z: 0.539}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4536600789463092}
@@ -260,8 +264,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417631472413956}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.2, y: 1.47, z: 2.58}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.98, y: 1.47, z: 2.58}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4580886654752152}
   - {fileID: 4536600789463092}
@@ -277,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 1327114488189348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4271358718955198}
   - {fileID: 4853320054252494}
@@ -595,8 +599,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af436bd1f7a27048b910dff5d299d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0.5
+  cooldown: 0.1
   firePoint: {fileID: 4396602368286098}
+--- !u!114 &114323809737939228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417631472413956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5744e8ea2d61ad2499cf01c39d30f811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 4396602368286098}
+  prefabFaceOverlay: {fileID: 1135376714448996, guid: 0bb976a12457ac547b1bf4554dffdbca,
+    type: 2}
 --- !u!114 &114484336344930586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -609,7 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weightMultiplier: 200
-  currentWeight: 0
+  currentWeight: 2
   txtWeight: {fileID: 114918570732562654}
 --- !u!114 &114493677484036444
 MonoBehaviour:
@@ -654,6 +672,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114611085942613536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417631472413956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.06666667
+  m_SyncRotationAxis: 4
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114737472742458086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,39 +709,6 @@ MonoBehaviour:
     ForwardSpeed: 80
     StrafeSpeed: 60
     JumpForce: 150
-    SlopeCurveModifier:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -90
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 45
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 90
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     CurrentTargetSpeed: 0
   mouseLook:
     XSensitivity: 2
@@ -711,9 +717,6 @@ MonoBehaviour:
     MinimumX: -89
     MaximumX: 89
     lockCursor: 1
-  advancedSettings:
-    groundRoofCheckDistance: 0.01
-    shellOffset: 0
   airControl:
     currentAC: 0
     maxAC: 100
@@ -741,6 +744,96 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114801690334425082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417631472413956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8d877a1b2833c4997f4b0785b9926a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onToggleShared:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 136769682127500270}
+        m_MethodName: set_enabled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114484336344930586}
+        m_MethodName: set_enabled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  onToggleLocal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114055166307702812}
+        m_MethodName: set_enabled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114323809737939228}
+        m_MethodName: set_enabled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1248170145769092}
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1119966564572472}
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  onToggleRemote:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  respawnTime: 5
 --- !u!114 &114918570732562654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -774,6 +867,38 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: text
+--- !u!114 &114967821815244752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417631472413956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 18
+    i1: 170
+    i2: 241
+    i3: 165
+    i4: 83
+    i5: 3
+    i6: 134
+    i7: 4
+    i8: 9
+    i9: 53
+    i10: 109
+    i11: 26
+    i12: 83
+    i13: 19
+    i14: 36
+    i15: 149
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!136 &136769682127500270
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -783,8 +908,8 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: bd5abc591197de34a81a0754228d8190, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 2
+  m_Radius: 0.5
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222658139524866036

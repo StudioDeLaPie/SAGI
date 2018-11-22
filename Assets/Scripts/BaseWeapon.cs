@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 
-public class BaseWeapon : MonoBehaviour
+public class BaseWeapon : NetworkBehaviour
 {
     [SerializeField] private float cooldown = 0.5f;
     [SerializeField] private Transform firePoint;
     //[SerializeField] private ShotEffectsManager shotEffects;
+    private RaycastHit hit;
+    private Weight touchedObject;
     private float lastShot;
 
     private void Start()
@@ -22,96 +24,102 @@ public class BaseWeapon : MonoBehaviour
         if (Time.time > lastShot + cooldown)
         {
             if (Input.GetMouseButtonDown(0))
-                Fire(true);
+                LocalFire(true);
 
             if (Input.GetMouseButtonDown(1))
-                Fire(false);
+                LocalFire(false);
 
             if (Input.GetKeyDown(KeyCode.R))
-                Freeze();
+                LocalFreeze();
         }
         if (Input.GetKeyDown(KeyCode.E))
-            Stop();
+            LocalStop();
     }
 
-    private void Fire(bool changeWeightPositively)//, bool clientHit, NetworkInstanceId id)
+    private void LocalFire(bool changeWeightPositively)
     {
-        //Debug.Log(NetworkManager.singleton.client.GetRTT());
-        //NetworkIdentity client = NetworkServer.FindLocalObject(id).GetComponent<NetworkIdentity>().clientAuthorityOwner.;
-        //Debug.Log(client.GetRTT());
-
-        RaycastHit hit;
-        Ray ray = new Ray(firePoint.position, firePoint.forward);
-        bool result = Physics.Raycast(ray, out hit, 500f);
-
-        if (result)
+        if (CalculateRayCast())
         {
-            Weight touchedObject = hit.transform.GetComponent<Weight>();
-
             if (touchedObject != null)
             {
-                hit.collider.GetComponent<Rigidbody>().isKinematic = false;
-
-                if (changeWeightPositively)
-                    touchedObject.IncreaseWeight();
-                else
-                    touchedObject.DecreaseWeight();
-
-                MaterialManager cube = touchedObject.GetComponent<MaterialManager>();
-                if (cube != null)
-                    cube.UpdateMaterial();
+                CmdFire(touchedObject.GetComponent<NetworkIdentity>(), changeWeightPositively);
+                //UpdateMaterialIfCube(touchedObject);
             }
         }
-
         lastShot = Time.time;
         //RpcProcessShotEffects(result, hit.point);
     }
 
-    private void Stop()
+    [Command]
+    private void CmdFire(NetworkIdentity touchedObjectId, bool changeWeightPositively)
     {
-        RaycastHit hit;
-        Ray ray = new Ray(firePoint.position, firePoint.forward);
-        bool result = Physics.Raycast(ray, out hit, 500f);
+        if (changeWeightPositively)
+            touchedObjectId.GetComponent<Weight>().CmdIncreaseWeight();
+        else
+            touchedObjectId.GetComponent<Weight>().CmdDecreaseWeight();
 
-        if (result)
+    }
+
+    private void LocalStop()
+    {
+        if (CalculateRayCast())
         {
-            Weight touchedObject = hit.transform.GetComponent<Weight>();
             if (touchedObject != null)
             {
-                touchedObject.GetComponent<Rigidbody>().isKinematic = false; //Sort l'objet touché du mode Freeze
-                touchedObject.GetComponent<Rigidbody>().velocity = Vector3.zero; //Stop son mouvement
-                touchedObject.ZeroGravity(); //Fixe son poids à 0
+                CmdStop(touchedObject.GetComponent<NetworkIdentity>());
 
-                MaterialManager cube = touchedObject.GetComponent<MaterialManager>();
-                if (cube != null)
-                    cube.UpdateMaterial();
+                //UpdateMaterialIfCube(touchedObject);
             }
         }
         lastShot = Time.time;
     }
 
-    private void Freeze()
+    [Command]
+    private void CmdStop(NetworkIdentity touchedObjectId)
     {
-        RaycastHit hit;
-        Ray ray = new Ray(firePoint.position, firePoint.forward);
-        bool result = Physics.Raycast(ray, out hit, 500f);
+        touchedObjectId.GetComponent<Weight>().CmdStop();
+    }
 
-        if (result)
+    private void LocalFreeze()
+    {
+        if (CalculateRayCast())
         {
-            Weight touchedObject = hit.transform.GetComponent<Weight>();
             if (touchedObject != null)
             {
-                hit.collider.GetComponent<Rigidbody>().isKinematic = true; //Freeze l'objet
-                touchedObject.ZeroGravity(); //Met son poids à zero
+                CmdFreeze(touchedObject.GetComponent<NetworkIdentity>());
 
-                MaterialManager cube = touchedObject.GetComponent<MaterialManager>();
-                if (cube != null)
-                    cube.UpdateMaterial();
+                //UpdateMaterialIfCube(touchedObject);
             }
         }
         lastShot = Time.time;
     }
 
+    [Command]
+    private void CmdFreeze(NetworkIdentity touchedObjectId)
+    {
+        touchedObjectId.GetComponent<Weight>().CmdFreeze();
+    }
+
+    //private void UpdateMaterialIfCube(Weight touchedObject)
+    //{
+    //    MaterialManager cube = touchedObject.GetComponent<MaterialManager>();
+    //    if (cube != null)
+    //        CmdUpdateCubeMaterial(touchedObject.GetComponent<NetworkIdentity>());
+    //}
+
+    //[Command]
+    //private void CmdUpdateCubeMaterial(NetworkIdentity touchedObjectId)
+    //{
+    //    touchedObjectId.GetComponent<MaterialManager>().CmdUpdateMaterial();
+    //}
+
+
+    private bool CalculateRayCast()
+    {
+        bool result = Physics.Raycast(firePoint.position, firePoint.forward, out hit, 500f);
+        touchedObject = hit.transform.GetComponent<Weight>();
+        return result;
+    }
 
     /*[ClientRpc]
     void RpcProcessShotEffects(bool playImpact, Vector3 point)

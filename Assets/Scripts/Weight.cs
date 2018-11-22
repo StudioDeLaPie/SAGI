@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Weight : MonoBehaviour
+public class Weight : NetworkBehaviour
 {
     private int maxWeight = 2;
     private int minWeight = -2;
@@ -9,7 +10,7 @@ public class Weight : MonoBehaviour
 
     //ConnectionPlayer connectionPlayer;
 
-    [SerializeField, Range(-2, 2)] private int currentWeight; //syncvar
+    [SerializeField, SyncVar] private int currentWeight;
     [SerializeField] private Text txtWeight;
     private Rigidbody rb;
 
@@ -29,29 +30,33 @@ public class Weight : MonoBehaviour
         }
     }
 
-    void Awake()
+    private void Awake()
     {
         //connectionPlayer = GetComponent<ConnectionPlayer>();
         rb = GetComponent<Rigidbody>();
     }
 
-    //[ServerCallback]
-    void OnEnable()
+    private void Start()
     {
-        if (gameObject.tag == "Player")
-            currentWeight = 2;
-
-        RpcUpdateDisplay();
+        if (gameObject.tag == "Player" && isLocalPlayer)
+        {
+            CmdIncreaseWeight();
+            txtWeight.text = currentWeight.ToString();
+        }
     }
 
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
+
         if (gameObject.tag == "Player")
         {
             if (Input.GetKeyDown(KeyCode.F))
-                ChangeWeight(true);
+                CmdIncreaseWeight();
             else if (Input.GetKeyDown(KeyCode.G))
-                ChangeWeight(false);
+                CmdDecreaseWeight();
+            UpdateDisplay();
         }
     }
 
@@ -60,39 +65,68 @@ public class Weight : MonoBehaviour
         rb.AddForce(0, -(currentWeight * weightMultiplier), 0);
     }
 
-    public void IncreaseWeight()
+    [Command]
+    public void CmdIncreaseWeight()
     {
-        ChangeWeight(true);
-    }
-
-    public void DecreaseWeight()
-    {
-        ChangeWeight(false);
-    }
-
-    public void ZeroGravity()
-    {
-        currentWeight = 0;
-        RpcUpdateDisplay();
-    }
-
-    private void ChangeWeight(bool positively)
-    {
-        currentWeight = positively ? currentWeight + 1 : currentWeight - 1;
+        RpcSetKinematic(false);
+        currentWeight++;
         currentWeight = Mathf.Clamp(currentWeight, minWeight, maxWeight);
-        RpcUpdateDisplay();
+        //RpcUpdateDisplay();
+    }
+
+    [Command]
+    public void CmdDecreaseWeight()
+    {
+        RpcSetKinematic(false);
+        currentWeight--;
+        currentWeight = Mathf.Clamp(currentWeight, minWeight, maxWeight);
+        //RpcUpdateDisplay();
+    }
+
+    [Command]
+    public void CmdStop()
+    {
+        RpcSetKinematic(true);
+        RpcSetKinematic(false);
+        currentWeight = 0;
+        //RpcUpdateDisplay();
+    }
+
+    [Command]
+    public void CmdFreeze()
+    {
+        CmdStop(); //Set le poids a zero et update l'affichage
+        RpcSetKinematic(true); //Freeze l'objet
+    }
+
+    [ClientRpc]
+    private void RpcSetKinematic(bool isKinematic)
+    {
+        if (isKinematic)
+            rb.velocity = Vector3.zero;
+        rb.isKinematic = isKinematic;
     }
 
     /// <summary>
     /// Demande a l'entite de s'appliquer une force d'ejection dans la direction donnee
     /// </summary>
-    //[ClientRpc]
+    [ClientRpc]
+    public void RpcRepulsion(Vector3 hitNormal)
+    {
+        Repulsion(hitNormal);
+    }
     public void Repulsion(Vector3 hitNormal)
     {
         AttractionRepulsion(hitNormal, false);
     }
 
-    public void Attraction(Vector3 hitNormal)
+    [ClientRpc]
+    public void RpcAttraction(Vector3 hitNormal)
+    {
+        Attraction(hitNormal);
+    }
+
+    public void Attraction (Vector3 hitNormal)
     {
         AttractionRepulsion(hitNormal, true);
     }
@@ -105,29 +139,10 @@ public class Weight : MonoBehaviour
         rb.AddForce(hitNormal, ForceMode.Impulse); //Application de la force
     }
 
-    //[Server]
-    //public void TakeDamage(float balDamage)
-    //{
-    //    //bool died = false;
-
-    //    //if (weight <= 0)
-    //    //    return died;
-
-    //    weight += balDamage;
-    //    //died = weight <= 0;
-
-    //    RpcTakeDamage();
-
-    //    //return died;
-    //}
-
-    //[ClientRpc]
-    void RpcUpdateDisplay()
+    private void UpdateDisplay()
     {
         if (gameObject.transform.tag == "Player")
             txtWeight.text = currentWeight.ToString();
-        //if (died)
-        //    connectionPlayer.Die();
     }
 
 

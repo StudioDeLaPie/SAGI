@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 54316118480871218}
   - component: {fileID: 114378527272745882}
   - component: {fileID: 114120379556848934}
+  - component: {fileID: 114672619088492512}
+  - component: {fileID: 114333548309884058}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Jumpable
@@ -39,8 +41,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1852223383898186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0733178, y: 16.4, z: 3.194828}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: -0.55, y: 2.46, z: -3.29}
+  m_LocalScale: {x: 2.8943, y: 2.8943, z: 2.8943}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -128,6 +130,27 @@ MonoBehaviour:
   weightMultiplier: 200
   currentWeight: 0
   txtWeight: {fileID: 0}
+--- !u!114 &114333548309884058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852223383898186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.06666667
+  m_SyncRotationAxis: 0
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114378527272745882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,3 +162,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3619e6b1e89e27459cd3d6db455a854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114672619088492512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852223383898186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 224
+    i1: 52
+    i2: 51
+    i3: 255
+    i4: 92
+    i5: 252
+    i6: 234
+    i7: 4
+    i8: 88
+    i9: 84
+    i10: 33
+    i11: 126
+    i12: 175
+    i13: 220
+    i14: 241
+    i15: 196
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

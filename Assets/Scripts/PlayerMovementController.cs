@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovementController : NetworkBehaviour
 {
     [Serializable]
     public class MovementSettings
@@ -113,12 +114,18 @@ public class PlayerMovementController : MonoBehaviour
     {
         m_RigidBody = GetComponent<Rigidbody>();
         playerWeight = GetComponent<Weight>();
+
+        if (!isLocalPlayer)
+            return;
         mouseLook.Init(transform, cam.transform);
     }
 
 
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
+
         RotateView();
 
         if (Input.GetButtonDown("Jump") && !m_Jump)
@@ -130,6 +137,9 @@ public class PlayerMovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isLocalPlayer)
+            return;
+
         Vector2 input = GetInput();
 
         movementSettings.UpdateDesiredTargetSpeed(input);
@@ -225,13 +235,24 @@ public class PlayerMovementController : MonoBehaviour
         airControl.Disable(time);
     }
 
+    [ClientRpc]
+    public void RpcDisableAirControl(float time)
+    {
+        DisableAirControl(time);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isLocalPlayer)
+            return;
         airControl.Enable();
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        if (!isLocalPlayer)
+            return;
+
         string objectTag = collision.collider.tag;
         if (collision.collider.tag == "Ground" || collision.collider.tag == "Roof" || collision.collider.tag == "Jumpable")
         {
@@ -290,6 +311,9 @@ public class PlayerMovementController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        if (!isLocalPlayer)
+            return;
+
         m_PreviouslyOnPlane = (m_IsGrounded || m_IsRoofed || m_Jumpable);
 
         if (collision.collider.tag == "Ground" || collision.collider.tag == "Roof" || collision.collider.tag == "Jumpable")
