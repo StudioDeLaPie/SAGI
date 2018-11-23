@@ -132,7 +132,7 @@ public class PlayerMovementController : NetworkBehaviour
         {
             m_Jump = true;
         }
-        Debug.Log("Grounded : " + m_IsGrounded + "   Roofed : " + m_IsRoofed + "    Jumpable : " + m_Jumpable + "  Air control : " + airControl.currentAC);
+        //Debug.Log("Grounded : " + m_IsGrounded + "   Roofed : " + m_IsRoofed + "    Jumpable : " + m_Jumpable + "  Air control : " + airControl.currentAC);
     }
 
     private void FixedUpdate()
