@@ -132,7 +132,6 @@ public class PlayerMovementController : NetworkBehaviour
         {
             m_Jump = true;
         }
-        Debug.Log("Grounded : " + m_IsGrounded + "   Roofed : " + m_IsRoofed + "    Jumpable : " + m_Jumpable + "  Air control : " + airControl.currentAC);
     }
 
     private void FixedUpdate()
@@ -259,11 +258,9 @@ public class PlayerMovementController : NetworkBehaviour
             m_PreviouslyOnPlane = (m_IsGrounded || m_IsRoofed || m_Jumpable);
 
             Vector3 normal = collision.contacts[0].normal;
-            Debug.DrawRay(collision.contacts[0].point, normal, Color.red, 2);
             bool notWallRun = Mathf.Abs(normal.y) > 0.5 ? true : false;
             if (notWallRun)
             {
-                Debug.DrawRay(collision.contacts[0].point, normal, Color.green, 2);
                 m_GroundContactNormal = normal; //La normale sur laquelle on se déplace
 
                 switch (objectTag)
@@ -277,11 +274,7 @@ public class PlayerMovementController : NetworkBehaviour
                         break;
 
                     case "Jumpable":
-                        //if ((playerWeight.CurrentWeight >= 0 && Vector3.Angle(Vector3.up, normal) < 40f) || (playerWeight.CurrentWeight <= 0 && Vector3.Angle(Vector3.down, normal) < 40f))
-                        //{
-                        //Debug.Log("On peut sauter  " + Vector3.Angle(Vector3.up, normal));
                         m_Jumpable = true;
-                        //}
                         break;
                 }
 
@@ -290,7 +283,6 @@ public class PlayerMovementController : NetworkBehaviour
             }
             else
             {
-                Debug.DrawRay(collision.contacts[0].point, normal, Color.red, 2);
                 switch (objectTag)
                 {
                     case "Ground":
