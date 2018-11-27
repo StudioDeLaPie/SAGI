@@ -1,15 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
-public class GameManager : NetworkBehaviour {
-    private int currentLevel = 1;
-    private string nameSceneSolo    = "Level";
-    private string nameSceneMulti   = "LevelMulti";
+public class GameManager : NetworkBehaviour
+{
 
-    [SerializeField] private bool multi = false;
+    private int currentLevel = 1;
+    private string nameSceneMulti = "LevelMulti";
+    private string nameSceneSolo = "Level";
+
+    private bool multi;
+
+    public int CurrentLevel
+    {
+        get
+        {
+            return currentLevel;
+        }
+
+        set
+        {
+            currentLevel = value;
+        }
+    }
+
+    public bool Multi
+    {
+        get
+        {
+            return multi;
+        }
+
+        set
+        {
+            multi = value;
+        }
+    }
 
     private void Start()
     {
@@ -18,12 +45,14 @@ public class GameManager : NetworkBehaviour {
 
     public void loadNextLevel()
     {
-        int temp = currentLevel + 1;
-        if (multi)
-            NetworkManager.singleton.ServerChangeScene(nameSceneMulti + temp);
-        else
-            SceneManager.LoadScene(nameSceneSolo + temp);
-
+        int temp = currentLevel + 1;            
+        NetworkManager.singleton.ServerChangeScene(multi ? nameSceneMulti : nameSceneSolo + temp);
         currentLevel++;
     }
+
+    public void LoadCurrentLevel()
+    {
+        NetworkManager.singleton.ServerChangeScene(multi ? nameSceneMulti : nameSceneSolo + currentLevel);
+    }
+
 }
