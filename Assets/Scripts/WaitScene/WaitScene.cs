@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaitScene : MonoBehaviour
 {
-    private float cooldown = 1;
+    private float cooldown;
     private float lastActionTime;
 
     private WeightSolo weight;
@@ -12,6 +12,7 @@ public class WaitScene : MonoBehaviour
 
     private void Start()
     {
+        cooldown = Aleatoire.AleatoireBetweenFloat(0.5f, 3);
         lastActionTime = Time.time;
         weight = GetComponent<WeightSolo>();
         rigidbody = GetComponent<Rigidbody>();
