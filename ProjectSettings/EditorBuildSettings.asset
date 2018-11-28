@@ -8,27 +8,24 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/test_Scripts_Perso.unity
     guid: 376b3a240d59143479a53a6a0168e573
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SceneOffline.unity
     guid: af48539e07aa32540be8ed0862b8faac
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level1.unity
     guid: 8f8b8642d9c289741b637c9a36fa04a5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level2.unity
     guid: 021f0ec85f8f0c44e8e24eb2bbcf1cbf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level3.unity
     guid: de7b8101937dbd1448cde92900cb06ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level4.unity
     guid: 778537a280947564784b0a20dbcb96ca
-  - enabled: 1
-    path: Assets/Scenes/Level5.unity
-    guid: 99f7f414b90187d47aaec605a31ae1bd
   - enabled: 1
     path: Assets/Scenes/LevelMulti1.unity
     guid: 30ae7e91117ded64cb01c375546863ca
