@@ -6,53 +6,63 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
-    [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject connection;
-    [SerializeField] private GameObject options;
-    [SerializeField] private GameObject loading;
+public class UIManager : MonoBehaviour
+{
+    [SerializeField] private GameObject _UIMainMenu;
+    [SerializeField] private GameObject _UIConnection;
+    [SerializeField] private GameObject _UIOptions;
+    [SerializeField] private GameObject _UILoading;
+    [SerializeField] private GameObject _UIPauseMenu;
+    [SerializeField] private GameObject _gameManager;
 
     [SerializeField] private Text ip;
     [SerializeField] private Text port;
 
 
     GameManager gameManager;
-
-    string pathGameManager = "Prefabs/GameManager";  
+    string pathGameManager = "Prefabs/GameManager";
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void OnError(NetworkMessage msg)
+    #region UI_Loading
+    public void CancelLoadingClick()
     {
-        Debug.Log("Timeout");
+        _UILoading.SetActive(false);
+        _UIConnection.SetActive(true);
     }
 
+    public void DisableLoading()
+    {
+        _UILoading.SetActive(false);
+    }
+    #endregion
 
-    #region MainMenu
+    #region UI_MainMenu
     public void TutorielClick()
     {
-        gameManager = GameObject.Instantiate(Resources.Load<GameObject>(pathGameManager)).GetComponent<GameManager>();
+        gameManager = GameObject.Instantiate(_gameManager).GetComponent<GameManager>();
         gameManager.CurrentLevel = 1;
         NetworkManager.singleton.networkAddress = "127.0.0.1";
         NetworkManager.singleton.networkPort = 7777;
         NetworkManager.singleton.onlineScene = "Level1";
         NetworkManager.singleton.maxConnections = 1;
         NetworkManager.singleton.StartHost();
-        mainMenu.SetActive(false);
+        _UIMainMenu.SetActive(false);
     }
 
     public void MultiplayerClick()
     {
-        mainMenu.SetActive(false);
-        connection.SetActive(true);
+        _UIMainMenu.SetActive(false);
+        _UIConnection.SetActive(true);
     }
 
     public void OptionsClick()
     {
-        Debug.Log("Menu non disponible");
+        _UIMainMenu.SetActive(false);
+        _UIOptions.SetActive(true);
     }
 
     public void ExitClick()
@@ -62,40 +72,38 @@ public class UIManager : MonoBehaviour {
 
     #endregion
 
-    #region Connection
+    #region UI_Connection
     public void HostClick()
     {
-        gameManager = GameObject.Instantiate(Resources.Load<GameObject>(pathGameManager)).GetComponent<GameManager>();
-        gameManager.CurrentLevel = 1;
-        mainMenu.SetActive(false);               
+        gameManager = GameObject.Instantiate(_gameManager).GetComponent<GameManager>();
+        gameManager.CurrentLevel = 1;       
         NetworkManager.singleton.onlineScene = "LevelMulti1";
         NetworkManager.singleton.StartHost();
-        connection.SetActive(false);
+        _UIConnection.SetActive(false);
     }
 
     public void JoinClick()
     {
-        gameManager = GameObject.Instantiate(Resources.Load<GameObject>(pathGameManager)).GetComponent<GameManager>();
-        gameManager.CurrentLevel = 1;
-
-        NetworkClient client = new NetworkClient();
-        client.RegisterHandler(MsgType.Error, OnError);
-
-        client.Connect(ip.text, int.Parse(port.text));
-
-
         NetworkManager.singleton.networkAddress = ip.text;
         NetworkManager.singleton.networkPort = int.Parse(port.text);
-        NetworkManager.singleton.onlineScene = "LevelMulti1";        
-        NetworkManager.singleton.StartClient();        
-        connection.SetActive(false);
-        loading.SetActive(true);
+        NetworkManager.singleton.onlineScene = "LevelMulti1";
+        NetworkManager.singleton.StartClient();
+        _UIConnection.SetActive(false);
+        _UILoading.SetActive(true);
     }
 
-    public void BackClick()
+    public void BackConnectionClick()
     {
-        connection.SetActive(false);
-        mainMenu.SetActive(true);
+        _UIConnection.SetActive(false);
+        _UIMainMenu.SetActive(true);
     }
-    #endregion    
+    #endregion
+
+    #region UI_Options
+    public void BackOptionClick()
+    {
+        _UIOptions.SetActive(false);
+        _UIMainMenu.SetActive(true);
+    }
+    #endregion
 }

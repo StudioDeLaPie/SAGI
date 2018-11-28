@@ -73,4 +73,16 @@ public class ConnectionPlayer : NetworkBehaviour
 
         EnablePlayer();
     }
+
+    public void Disconnect()
+    {
+        if(!isServer)
+        {
+            NetworkManager.singleton.StopClient();
+        }
+        else if(isServer)
+        {
+            NetworkManager.singleton.StopServer();
+        }
+    }
 }

@@ -4,16 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CustomNetworkManager : NetworkManager {
+public class CustomNetworkManager : NetworkManager
+{
+    [SerializeField] private UIManager _UIManager;
 
-    /*public override void OnClientDisconnect(NetworkConnection conn)
+    public override void OnClientDisconnect(NetworkConnection conn)
     {
         try
         {
-            base.OnClientDisconnect(conn);
-        }catch
+            
+        }
+        catch
         {
-            Debug.Log("TIMOUT!");
-        } 
-    }*/
+            Debug.Log("Error NetworkManager");
+        }
+        finally
+        {
+            if (!NetworkManager.singleton.clientLoadedScene)
+            {
+                _UIManager.CancelLoadingClick();
+            }
+        }
+
+    }
+
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        _UIManager.DisableLoading();
+    }
 }
