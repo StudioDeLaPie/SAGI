@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 
-public class Corridor : MonoBehaviour//NetworkBehaviour
+public class Corridor : NetworkBehaviour//MonoBehaviour//
 {
 
     public bool isEntry;
@@ -28,18 +28,22 @@ public class Corridor : MonoBehaviour//NetworkBehaviour
             GetComponent<BoxCollider>().enabled = false;
             Destroy(GetComponent<NetworkAnimator>());
             enabled = false;
-            return;
         }
-        if (isEntry)
-            GetComponent<NetworkAnimator>().animator = exitDoorAnimator;
         else
-            GetComponent<NetworkAnimator>().animator = entryDoorAnimator;
-        GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
-        playersInside = new List<PlayerMovementController>();
+        {
+            if (isEntry)
+                GetComponent<NetworkAnimator>().animator = exitDoorAnimator;
+            else
+                GetComponent<NetworkAnimator>().animator = entryDoorAnimator;
+            GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
+            playersInside = new List<PlayerMovementController>();
+        }
+        Debug.Log(gameObject.name + " Awake : " + Time.time);
     }
 
     private void Start()
     {
+        Debug.Log(gameObject.name + " Start : " + Time.time);
         //if (!isServer)
         //    enabled = false;
 
@@ -53,6 +57,7 @@ public class Corridor : MonoBehaviour//NetworkBehaviour
 
     public void ExitDoorState(bool open)
     {
+        Debug.Log("changement d'état de la porte de sortie " + gameObject.name);
         ChangeDoorState(false, open);
     }
 
@@ -78,9 +83,9 @@ public class Corridor : MonoBehaviour//NetworkBehaviour
         {
             NetworkConnection netId = player.GetComponent<NetworkIdentity>().connectionToClient;
             //if (netId.isServer)
-                result.Add(netId, transform.InverseTransformPoint(player.transform.position));
+            result.Add(netId, transform.InverseTransformPoint(player.transform.position));
             //else
-                //result.Add(netId, transform.InverseTransformPoint(player.GetComponent<ConnectionPlayer>().RpcGetPosition()));
+            //result.Add(netId, transform.InverseTransformPoint(player.GetComponent<ConnectionPlayer>().RpcGetPosition()));
         }
         return result;
     }
@@ -117,7 +122,7 @@ public class Corridor : MonoBehaviour//NetworkBehaviour
             playersInside.Remove(controller);
         }
     }
-    
+
     public bool IsReady()
     {
         return entryDoorAnimator.isActiveAndEnabled && exitDoorAnimator.isActiveAndEnabled;

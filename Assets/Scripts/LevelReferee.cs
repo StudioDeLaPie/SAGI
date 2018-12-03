@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class LevelReferee : NetworkBehaviour {
+public class LevelReferee : NetworkBehaviour
+{
 
     public List<ReceptacleCube> receptaclesCube = new List<ReceptacleCube>();
     public Corridor entryCorridor;
@@ -13,8 +14,9 @@ public class LevelReferee : NetworkBehaviour {
     private GameManager gameManager;
 
     // Use this for initialization
-    void Start () {
-		if (receptaclesCube.Count <= 0 || entryCorridor == null || exitCorridor == null)
+    void Start()
+    {
+        if (receptaclesCube.Count <= 0 || entryCorridor == null || exitCorridor == null)
         {
             Debug.Break();
             Debug.LogError("Le level Referee n'a pas toutes les infos requises.");
@@ -24,31 +26,22 @@ public class LevelReferee : NetworkBehaviour {
             receptacle.activateEvent.AddListener(UpdateWinConditions);
         }
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
-
-        if (gameManager.playersCoordinatesInCorridor != null)
-        {
-            bool test = false;
-            while (test != true)
-            {
-                test = entryCorridor.IsReady() && exitCorridor.IsReady();
-            }
-            entryCorridor.SetPlayersLocalCoordinates(gameManager.playersCoordinatesInCorridor);
-        }
-        entryCorridor.ExitDoorState(true);
+        Debug.Log("Referee start : " + Time.time);
+        StartCoroutine(OpenEntryCorridor());
         exitCorridor.bothPlayersInsideEvent.AddListener(PlayersInsideExitCorridor);
         //Debug.Log("Couloir d'entrée ouvert");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void UpdateWinConditions()
     {
         isLevelFinished = true;
-        foreach(ReceptacleCube receptacle in receptaclesCube)
+        foreach (ReceptacleCube receptacle in receptaclesCube)
         {
             if (!receptacle.activated)
                 isLevelFinished = false;
@@ -69,5 +62,19 @@ public class LevelReferee : NetworkBehaviour {
         exitCorridor.EntryDoorState(false);
         gameManager.playersCoordinatesInCorridor = exitCorridor.GetPlayersLocalCoordinates();
         gameManager.LoadNextLevel();
+    }
+
+    private IEnumerator OpenEntryCorridor()
+    {
+        bool test = false;
+        while (test != true)
+        {
+            test = entryCorridor.IsReady() && exitCorridor.IsReady();
+            Debug.Log("Test pour l'ouverture de la porte : " + Time.time);
+            yield return null;
+        }
+        if (gameManager.playersCoordinatesInCorridor != null)
+            entryCorridor.SetPlayersLocalCoordinates(gameManager.playersCoordinatesInCorridor);
+        entryCorridor.ExitDoorState(true);
     }
 }

@@ -79,6 +79,7 @@ public class UIManager : MonoBehaviour
         gameManager.CurrentLevel = 1;
         gameManager.Multi = true;
         NetworkManager.singleton.onlineScene = "LevelMulti1";
+        NetworkManager.singleton.maxConnections = 2;
         NetworkManager.singleton.StartHost();
         _UIConnection.SetActive(false);
     }
@@ -93,10 +94,11 @@ public class UIManager : MonoBehaviour
 
     public void JoinClick()
     {
-        NetworkClient client = new NetworkClient();
-        client.Connect("127.0.0.1", 7777);
-        client.RegisterHandler(MsgType.Error, OnError);
+        //NetworkClient client = new NetworkClient();
+        //client.Connect(ip.text, int.Parse(port.text));
+        //client.RegisterHandler(MsgType.Error, OnError);
 
+        NetworkManager.singleton.maxConnections = 2;
         NetworkManager.singleton.networkAddress = ip.text;
         NetworkManager.singleton.networkPort = int.Parse(port.text);
         NetworkManager.singleton.onlineScene = "LevelMulti1";

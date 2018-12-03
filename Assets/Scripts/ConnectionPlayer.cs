@@ -19,8 +19,8 @@ public class ConnectionPlayer : NetworkBehaviour
         /*if (isLocalPlayer)
             mainCamera = Camera.main.gameObject;
             */
-        EnablePlayer();
         DontDestroyOnLoad(gameObject);
+        EnablePlayer();
     }
 
     void DisablePlayer()

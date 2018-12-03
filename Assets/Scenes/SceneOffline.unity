@@ -238,7 +238,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1190,7 +1190,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1804,7 +1804,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1888,7 +1888,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -2303,7 +2303,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -2710,11 +2710,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114972734147426276, guid: f39d9ac900ce8f64fb8cec208d2e62c7,
-        type: 2}
-      propertyPath: m_SpawnPrefabs.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4285988628360474, guid: f39d9ac900ce8f64fb8cec208d2e62c7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 7.70639
@@ -2750,11 +2745,11 @@ Prefab:
     - target: {fileID: 114972734147426276, guid: f39d9ac900ce8f64fb8cec208d2e62c7,
         type: 2}
       propertyPath: _UIManager
-      value:
+      value: 
       objectReference: {fileID: 1793802845}
     - target: {fileID: 114972734147426276, guid: f39d9ac900ce8f64fb8cec208d2e62c7,
         type: 2}
-      propertyPath: m_AutoCreatePlayer
+      propertyPath: m_LogLevel
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2807,13 +2802,13 @@ Prefab:
     - target: {fileID: 114375336086897124, guid: b7175dfa3382f3546b8b6e5160d6a95e,
         type: 2}
       propertyPath: GameManager
-      value:
+      value: 
       objectReference: {fileID: 1398958547694540, guid: 554b498c199b508468b62c49ff192da3,
         type: 2}
     - target: {fileID: 114375336086897124, guid: b7175dfa3382f3546b8b6e5160d6a95e,
         type: 2}
       propertyPath: _gameManager
-      value:
+      value: 
       objectReference: {fileID: 1398958547694540, guid: 554b498c199b508468b62c49ff192da3,
         type: 2}
     - target: {fileID: 224455543011707284, guid: b7175dfa3382f3546b8b6e5160d6a95e,
@@ -2967,7 +2962,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0

@@ -8,14 +8,6 @@ public class CustomNetworkManager : NetworkManager
 {
     [SerializeField] private UIManager _UIManager;
 
-    
-
-
-
-
-
-
-
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         try
@@ -46,6 +38,7 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnClientConnect(NetworkConnection conn)
     {
+        //base.OnClientConnect(conn);
         _UIManager.DisableLoading();
     }
 }

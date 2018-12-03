@@ -488,6 +488,10 @@ Prefab:
       propertyPath: exitCorridor
       value: 
       objectReference: {fileID: 1243715834}
+    - target: {fileID: 1753908398284976, guid: bb442dda07b821e4eb99e707e6fa215b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb442dda07b821e4eb99e707e6fa215b, type: 2}
   m_IsPrefabAsset: 0
@@ -571,9 +575,38 @@ Prefab:
       propertyPath: m_Name
       value: Couloir (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1204253792522746, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114778703405580438, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Animator
+      value: 
+      objectReference: {fileID: 1080704243}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_ParameterSendBits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &1080704243 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95779995119890638, guid: 330987ffa84fa6e48bfe804e3167de2a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1080704242}
 --- !u!114 &1243715834 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114778703405580438, guid: 330987ffa84fa6e48bfe804e3167de2a,
@@ -628,9 +661,38 @@ Prefab:
       propertyPath: isExit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1204253792522746, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114778703405580438, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Animator
+      value: 
+      objectReference: {fileID: 1327277743}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_ParameterSendBits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &1327277743 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95779995119890638, guid: 330987ffa84fa6e48bfe804e3167de2a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1327277742}
 --- !u!1001 &1370436740
 Prefab:
   m_ObjectHideFlags: 0
@@ -679,9 +741,38 @@ Prefab:
       propertyPath: isEntry
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1204253792522746, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114778703405580438, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Animator
+      value: 
+      objectReference: {fileID: 1370436741}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_ParameterSendBits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &1370436741 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95779995119890638, guid: 330987ffa84fa6e48bfe804e3167de2a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1370436740}
 --- !u!1 &1672896266
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,7 +995,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1848218894}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000002533197}
-  m_LocalPosition: {x: 0, y: 2, z: 41}
+  m_LocalPosition: {x: 0, y: 2, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -953,9 +1044,38 @@ Prefab:
       propertyPath: m_Name
       value: Couloir (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1204253792522746, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114778703405580438, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_Animator
+      value: 
+      objectReference: {fileID: 1875353621}
+    - target: {fileID: 114644574387457736, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: m_ParameterSendBits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &1875353621 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95779995119890638, guid: 330987ffa84fa6e48bfe804e3167de2a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1875353620}
 --- !u!1 &2015547313
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +1110,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2015547313}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000002533197}
-  m_LocalPosition: {x: 0, y: 2, z: 45}
+  m_LocalPosition: {x: 0, y: 2, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
