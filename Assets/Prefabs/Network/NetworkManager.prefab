@@ -122,4 +122,4 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  uiManager: {fileID: 0}
+  _UIManager: {fileID: 0}

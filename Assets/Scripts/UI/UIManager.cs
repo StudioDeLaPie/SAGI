@@ -82,8 +82,20 @@ public class UIManager : MonoBehaviour
         _UIConnection.SetActive(false);
     }
 
+    public void OnError(NetworkMessage msg)
+    {
+        //msg.ReadMessage<ErrorMessage>();
+        Debug.Log(msg.ReadMessage<ErrorMessage>().ToString());
+        
+    }
+
+
     public void JoinClick()
     {
+        NetworkClient client = new NetworkClient();
+        client.Connect("127.0.0.1", 7777);
+        client.RegisterHandler(MsgType.Error, OnError);
+
         NetworkManager.singleton.networkAddress = ip.text;
         NetworkManager.singleton.networkPort = int.Parse(port.text);
         NetworkManager.singleton.onlineScene = "LevelMulti1";

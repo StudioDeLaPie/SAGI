@@ -9,6 +9,7 @@ TagManager:
   - Jumpable
   - GameManager
   - UIManager
+  - SoundManager
   layers:
   - Default
   - TransparentFX

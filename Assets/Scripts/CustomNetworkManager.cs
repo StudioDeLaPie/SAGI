@@ -8,11 +8,19 @@ public class CustomNetworkManager : NetworkManager
 {
     [SerializeField] private UIManager _UIManager;
 
+    
+
+
+
+
+
+
+
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         try
         {
-            
+
         }
         catch
         {

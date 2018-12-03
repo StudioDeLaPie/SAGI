@@ -131,7 +131,7 @@ public class PlayerMovementController : NetworkBehaviour
         if (Input.GetButtonDown("Jump") && !m_Jump)
         {
             m_Jump = true;
-        }
+        }        
     }
 
     private void FixedUpdate()
@@ -160,9 +160,16 @@ public class PlayerMovementController : NetworkBehaviour
                 if (m_RigidBody.velocity.sqrMagnitude <
                     (movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
                 {
-                    m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);
+                    GetComponent<SoundPlayerManage>().StartDeplacement();
+                    //Debug.Log("Start");
+                    m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);                    
                 }
             }
+        }
+        else
+        {
+            GetComponent<SoundPlayerManage>().StopDeplacement();
+            //Debug.Log("Stop");
         }
 
         if (m_IsGrounded || m_IsRoofed)
@@ -214,7 +221,7 @@ public class PlayerMovementController : NetworkBehaviour
     }
 
     private void ApplyDeceleration()
-    {
+    {        
         if (!airControl.Disabled)
         {
             if ((m_IsGrounded || m_IsRoofed || m_Jumpable) && !m_Jumping)

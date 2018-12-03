@@ -24,16 +24,28 @@ public class BaseWeapon : NetworkBehaviour
         if (Time.time > lastShot + cooldown)
         {
             if (Input.GetMouseButtonDown(0))
+            {
                 LocalFire(true);
+                GetComponent<SoundPlayerManage>().ShotWeaponLeft();
+            }
 
             if (Input.GetMouseButtonDown(1))
+            {
                 LocalFire(false);
+                GetComponent<SoundPlayerManage>().ShotWeaponRight();
+            }
 
             if (Input.GetKeyDown(KeyCode.R))
+            {
                 LocalFreeze();
+                GetComponent<SoundPlayerManage>().ShotFreeze();
+            }
         }
         if (Input.GetKeyDown(KeyCode.E))
+        {
             LocalStop();
+            GetComponent<SoundPlayerManage>().ShotStop();
+        }
     }
 
     private void LocalFire(bool changeWeightPositively)
