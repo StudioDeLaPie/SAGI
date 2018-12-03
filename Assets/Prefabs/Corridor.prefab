@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 65990889257594660}
   m_Layer: 0
   m_Name: floor_4
-  m_TagString: Untagged
+  m_TagString: Roof
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 65084606219449264}
   m_Layer: 0
   m_Name: floor_4
-  m_TagString: Untagged
+  m_TagString: Roof
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 205309939233344904}
   m_Layer: 0
   m_Name: floor_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 205361380199753452}
   m_Layer: 0
   m_Name: floor_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -359,10 +359,13 @@ GameObject:
   - component: {fileID: 4614242732109848}
   - component: {fileID: 65573571931386126}
   - component: {fileID: 114778703405580438}
+  - component: {fileID: 114644574387457736}
+  - component: {fileID: 114383240062648654}
+  - component: {fileID: 95371089906689082}
   m_Layer: 0
-  m_Name: Couloir
+  m_Name: Corridor
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
@@ -428,7 +431,7 @@ GameObject:
   - component: {fileID: 65489853843809826}
   m_Layer: 0
   m_Name: floor_4
-  m_TagString: Untagged
+  m_TagString: Roof
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -581,7 +584,7 @@ GameObject:
   - component: {fileID: 205997008009461506}
   m_Layer: 0
   m_Name: floor_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -665,7 +668,7 @@ GameObject:
   - component: {fileID: 205875934150490668}
   m_Layer: 0
   m_Name: floor_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -898,10 +901,11 @@ GameObject:
   - component: {fileID: 23232935079348372}
   - component: {fileID: 95779995119890638}
   - component: {fileID: 64762263836871698}
+  - component: {fileID: 65187313246999638}
   m_Layer: 0
-  m_Name: door_1
+  m_Name: EntryDoor
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1085,10 +1089,11 @@ GameObject:
   - component: {fileID: 23186638779487818}
   - component: {fileID: 95660894758917390}
   - component: {fileID: 64515236724753400}
+  - component: {fileID: 65000845739483220}
   m_Layer: 0
-  m_Name: door_1 (2)
+  m_Name: ExitDoor
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1257,7 +1262,7 @@ GameObject:
   - component: {fileID: 65083357158457956}
   m_Layer: 0
   m_Name: floor_4
-  m_TagString: Untagged
+  m_TagString: Roof
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1327,7 +1332,7 @@ GameObject:
   - component: {fileID: 65933748790063318}
   m_Layer: 0
   m_Name: floor_4
-  m_TagString: Untagged
+  m_TagString: Roof
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1360,7 +1365,7 @@ GameObject:
   - component: {fileID: 205160542270271244}
   m_Layer: 0
   m_Name: floor_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2203,7 +2208,7 @@ Transform:
   - {fileID: 4517763669503398}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4618947860637930
 Transform:
   m_ObjectHideFlags: 1
@@ -3829,7 +3834,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.32456395
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4871,6 +4876,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 4bffff855c108e34c83d8605893f4c51, type: 3}
+--- !u!65 &65000845739483220
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1759762688365302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.38, y: 3.65, z: 0.9}
+  m_Center: {x: 0, y: 1.825, z: 0}
 --- !u!65 &65083357158457956
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4943,6 +4960,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 0.2986662}
   m_Center: {x: 0, y: 2, z: 0.14933296}
+--- !u!65 &65187313246999638
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1626091951538332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.38, y: 3.65, z: 0.9}
+  m_Center: {x: 0, y: 1.825, z: 0}
 --- !u!65 &65372345675087600
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -5306,6 +5335,24 @@ Animator:
   m_GameObject: {fileID: 1730563510124248}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a6dcdb2cf6b425a4880ffa22fdc3fbc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &95371089906689082
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204253792522746}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -5721,6 +5768,57 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114383240062648654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204253792522746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 51
+    i1: 9
+    i2: 135
+    i3: 255
+    i4: 168
+    i5: 79
+    i6: 166
+    i7: 228
+    i8: 139
+    i9: 254
+    i10: 128
+    i11: 78
+    i12: 49
+    i13: 103
+    i14: 222
+    i15: 42
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114644574387457736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204253792522746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 0}
+  m_ParameterSendBits: 1
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114778703405580438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5734,8 +5832,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEntry: 0
   isExit: 0
-  entryDoorAnimator: {fileID: 95660894758917390}
-  exitDoorAnimator: {fileID: 95779995119890638}
+  entryDoorAnimator: {fileID: 95779995119890638}
+  exitDoorAnimator: {fileID: 95660894758917390}
+  bothPlayersInsideEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!205 &205117780606288452
 LODGroup:
   m_ObjectHideFlags: 1
@@ -5769,7 +5872,7 @@ LODGroup:
   m_FadeMode: 0
   m_AnimateCrossFading: 1
   m_LODs:
-  - screenRelativeHeight: 0.4119806
+  - screenRelativeHeight: 0.20611785
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 23562105001269258}
@@ -5832,7 +5935,7 @@ LODGroup:
   m_FadeMode: 0
   m_AnimateCrossFading: 1
   m_LODs:
-  - screenRelativeHeight: 0.4119806
+  - screenRelativeHeight: 0.12509745
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 23129443718163670}
@@ -6042,7 +6145,7 @@ LODGroup:
   m_FadeMode: 0
   m_AnimateCrossFading: 1
   m_LODs:
-  - screenRelativeHeight: 0.4119806
+  - screenRelativeHeight: 0.16228198
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 23028273351050566}

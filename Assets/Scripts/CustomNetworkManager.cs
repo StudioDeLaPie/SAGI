@@ -36,6 +36,14 @@ public class CustomNetworkManager : NetworkManager
 
     }
 
+    //public override void OnServerReady(NetworkConnection conn)
+    //{
+    //    base.OnServerReady(conn);
+    //    GameObject player = Instantiate(playerPrefab);
+    //    NetworkServer.Spawn(player);
+    //    ClientScene.AddPlayer(conn, player.GetComponent<NetworkIdentity>().playerControllerId);
+    //}
+
     public override void OnClientConnect(NetworkConnection conn)
     {
         _UIManager.DisableLoading();

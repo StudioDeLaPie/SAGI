@@ -8,25 +8,30 @@ public class WaitScene : MonoBehaviour
     private float lastActionTime;
 
     private WeightSolo weight;
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
 
-    private void Start()
+    private void Awake()
     {
-        cooldown = Aleatoire.AleatoireBetweenFloat(0.5f, 3);
+        cooldown = Aleatoire.AleatoireBetweenFloat(0.3f, 1.5F);
         lastActionTime = Time.time;
         weight = GetComponent<WeightSolo>();
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+    }
+    private void Start()
+    {
+        ChangeWeight();
+        Addforce();
     }
 
     private void Update()
     {
         if(Time.time > cooldown + lastActionTime)
         {
-            if(Aleatoire.AleatoireBetween(0,1) == 1)
+            if(Aleatoire.AleatoireBetween(0, 5) <= 4)
             {
                 ChangeWeight();
             }
-            if(Aleatoire.AleatoireBetween(0, 1) == 1)
+            if(Aleatoire.AleatoireBetween(0, 5) <= 4)
             {
                 /*if (Aleatoire.AleatoireBetween(0, 1) == 1)
                     stop();*/
@@ -46,11 +51,11 @@ public class WaitScene : MonoBehaviour
 
     private void Addforce()
     {       
-        rigidbody.AddForce(Aleatoire.AleatoireVectorDirection() * Aleatoire.AleatoireBetween(1000,1500));
+        rb.AddForce(Aleatoire.AleatoireVectorDirection() * Aleatoire.AleatoireBetween(1000,1500));
     }
 
     private void stop()
     {
-        rigidbody.velocity = Vector3.zero;
+        rb.velocity = Vector3.zero;
     }
 }
