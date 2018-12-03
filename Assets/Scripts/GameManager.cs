@@ -10,6 +10,8 @@ public class GameManager : NetworkBehaviour
     private string nameSceneMulti = "LevelMulti";
     private string nameSceneSolo = "Level";
 
+    [HideInInspector] public Dictionary<NetworkConnection, Vector3> playersCoordinatesInCorridor = null;
+
     private bool multi;
 
     public int CurrentLevel
@@ -43,7 +45,7 @@ public class GameManager : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void loadNextLevel()
+    public void LoadNextLevel()
     {
         int temp = currentLevel + 1;            
         NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + temp);

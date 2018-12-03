@@ -76,7 +76,8 @@ public class UIManager : MonoBehaviour
     public void HostClick()
     {
         gameManager = GameObject.Instantiate(_gameManager).GetComponent<GameManager>();
-        gameManager.CurrentLevel = 1;       
+        gameManager.CurrentLevel = 1;
+        gameManager.Multi = true;
         NetworkManager.singleton.onlineScene = "LevelMulti1";
         NetworkManager.singleton.StartHost();
         _UIConnection.SetActive(false);

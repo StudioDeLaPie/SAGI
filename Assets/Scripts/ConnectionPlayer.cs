@@ -20,6 +20,7 @@ public class ConnectionPlayer : NetworkBehaviour
             mainCamera = Camera.main.gameObject;
             */
         EnablePlayer();
+        DontDestroyOnLoad(gameObject);
     }
 
     void DisablePlayer()
@@ -52,6 +53,18 @@ public class ConnectionPlayer : NetworkBehaviour
             onToggleLocal.Invoke(false);
             onToggleRemote.Invoke(true);
         }
+    }
+
+    //[ClientRpc]
+    //public Vector3 RpcGetPosition()
+    //{
+    //    return transform.position;
+    //}
+
+    [ClientRpc]
+    public void RpcSetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
 
     public void Die()

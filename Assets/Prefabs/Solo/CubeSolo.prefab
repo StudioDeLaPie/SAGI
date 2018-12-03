@@ -25,9 +25,6 @@ GameObject:
   - component: {fileID: 54885959657101182}
   - component: {fileID: 114673511337661724}
   - component: {fileID: 114260776085731332}
-  - component: {fileID: 114093392629278874}
-  - component: {fileID: 114524841468865440}
-  - component: {fileID: 114995656481271090}
   - component: {fileID: 114856107031683886}
   m_Layer: 0
   m_Name: CubeSolo
@@ -118,17 +115,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114093392629278874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1070092186455964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52724222aa328ff4d8a81bece5ce290b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114260776085731332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,17 +124,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85633e560d77a6d44b8c16ad6f47e8aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114524841468865440
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1070092186455964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52724222aa328ff4d8a81bece5ce290b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114673511337661724
@@ -166,17 +141,6 @@ MonoBehaviour:
   currentWeight: 0
   txtWeight: {fileID: 0}
 --- !u!114 &114856107031683886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1070092186455964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52724222aa328ff4d8a81bece5ce290b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114995656481271090
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
