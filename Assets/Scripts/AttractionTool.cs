@@ -39,19 +39,22 @@ public class AttractionTool : NetworkBehaviour
 
             if (CalculateRaycast())
             {
+                
                 if (touchedObject != null)
                 {
                     CalculateHitNormal();
-
+                    GetComponent<SoundPlayerManage>().StartOverlay();
                     UpdateOverlay();
                     if (Input.GetMouseButtonDown(0))
                     {
+                        GetComponent<SoundPlayerManage>().ShotExpulse();
                         movementController.DisableAirControl(2);
                         playerWeight.Attraction(hitNormal);
                         CmdRepulsion(touchedObject.GetComponent<NetworkIdentity>(), hitNormal);
                     }
                     else if (Input.GetMouseButtonDown(1))
                     {
+                        GetComponent<SoundPlayerManage>().ShotImpulse();
                         movementController.DisableAirControl(2);
                         playerWeight.Repulsion(hitNormal);
                         CmdAttraction(touchedObject.GetComponent<NetworkIdentity>(), hitNormal);
@@ -59,6 +62,7 @@ public class AttractionTool : NetworkBehaviour
                 }
                 else
                 {
+                    GetComponent<SoundPlayerManage>().StopOverlay();
                     faceOverlay.SetActive(false);
                 }
             }
@@ -69,6 +73,7 @@ public class AttractionTool : NetworkBehaviour
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            GetComponent<SoundPlayerManage>().StopOverlay();
             weapon.enabled = true;
             faceOverlay.SetActive(false);
         }

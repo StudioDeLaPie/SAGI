@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _UILoading;
     [SerializeField] private GameObject _UIPauseMenu;
     [SerializeField] private GameObject _gameManager;
+    [SerializeField] private SoundManager soundManager;
 
     [SerializeField] private Text ip;
     [SerializeField] private Text port;
@@ -30,10 +31,12 @@ public class UIManager : MonoBehaviour
     #region UI_Loading
     public void CancelLoadingClick()
     {
+        soundManager.ShotDefaultUISound();
         _UILoading.SetActive(false);
         _UIConnection.SetActive(true);
     }
 
+    //Utilisé par le customNetworckManager pour enlever la fenetre de chargement
     public void DisableLoading()
     {
         _UILoading.SetActive(false);
@@ -43,6 +46,7 @@ public class UIManager : MonoBehaviour
     #region UI_MainMenu
     public void TutorielClick()
     {
+        soundManager.ShotConnectionUISound();
         gameManager = GameObject.Instantiate(_gameManager).GetComponent<GameManager>();
         gameManager.CurrentLevel = 1;
         NetworkManager.singleton.networkAddress = "127.0.0.1";
@@ -55,12 +59,14 @@ public class UIManager : MonoBehaviour
 
     public void MultiplayerClick()
     {
+        soundManager.ShotDefaultUISound();
         _UIMainMenu.SetActive(false);
         _UIConnection.SetActive(true);
     }
 
     public void OptionsClick()
     {
+        soundManager.ShotDefaultUISound();
         _UIMainMenu.SetActive(false);
         _UIOptions.SetActive(true);
     }
@@ -75,6 +81,7 @@ public class UIManager : MonoBehaviour
     #region UI_Connection
     public void HostClick()
     {
+        soundManager.ShotConnectionUISound();
         gameManager = GameObject.Instantiate(_gameManager).GetComponent<GameManager>();
         gameManager.CurrentLevel = 1;
         gameManager.Multi = true;
@@ -87,7 +94,7 @@ public class UIManager : MonoBehaviour
     {
         //msg.ReadMessage<ErrorMessage>();
         Debug.Log(msg.ReadMessage<ErrorMessage>().ToString());
-        
+
     }
 
 
@@ -96,7 +103,7 @@ public class UIManager : MonoBehaviour
         NetworkClient client = new NetworkClient();
         client.Connect("127.0.0.1", 7777);
         client.RegisterHandler(MsgType.Error, OnError);
-
+        soundManager.ShotConnectionUISound();
         NetworkManager.singleton.networkAddress = ip.text;
         NetworkManager.singleton.networkPort = int.Parse(port.text);
         NetworkManager.singleton.onlineScene = "LevelMulti1";
@@ -107,6 +114,7 @@ public class UIManager : MonoBehaviour
 
     public void BackConnectionClick()
     {
+        soundManager.ShotDefaultUISound();
         _UIConnection.SetActive(false);
         _UIMainMenu.SetActive(true);
     }
@@ -115,6 +123,7 @@ public class UIManager : MonoBehaviour
     #region UI_Options
     public void BackOptionClick()
     {
+        soundManager.ShotDefaultUISound();
         _UIOptions.SetActive(false);
         _UIMainMenu.SetActive(true);
     }

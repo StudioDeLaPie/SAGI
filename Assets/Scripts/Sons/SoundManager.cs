@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
     private float cooldown = 5;
     private float lastTime;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioSource defaultUISound;
+    [SerializeField] private AudioSource connectionUISound;
 
     void Start()
     {
@@ -23,6 +25,16 @@ public class SoundManager : MonoBehaviour
             //audioMixer.FindSnapshot("Accords").TransitionTo(40);
             //Debug.Log("Transition");
         }
+    }
+
+    public void ShotDefaultUISound()
+    {
+        defaultUISound.PlayOneShot(defaultUISound.clip);
+    }
+
+    public void ShotConnectionUISound()
+    {
+        connectionUISound.PlayOneShot(connectionUISound.clip);
     }
 
 
