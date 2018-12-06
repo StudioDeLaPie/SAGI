@@ -4,28 +4,13 @@ using UnityEngine;
 
 public static class AudioController
 {
-    private static Dictionary<AudioSource, bool> fadeisRun = new Dictionary<AudioSource, bool>();
-
-    /// <summary>
-    /// Test si l'audio source existe dans le dictionnaire
-    /// Si il n'existe pas il l'ajoute
-    /// </summary>
-    /// <param name="audioSource"> AudioSource a tester</param>
-
-    private static void TestDico(AudioSource audioSource)
-    {
-        if(!fadeisRun.ContainsKey(audioSource))
-        {
-            fadeisRun.Add(audioSource, false);
-        }
-    }
-
+    private static Dictionary<AudioSource, bool> fadeisRun = new Dictionary<AudioSource, bool>();    
 
     public static IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
     {
         TestDico(audioSource);
 
-        if (!fadeisRun[audioSource])
+        if (!fadeisRun[audioSource]) //On passe que si il n'y a pas de fade en cours
         {
             fadeisRun[audioSource] = true;
             float startVolume = audioSource.volume;
@@ -62,6 +47,19 @@ public static class AudioController
             }
             audioSource.volume = 1;
             fadeisRun[audioSource] = false;
+        }
+    }
+
+    /// <summary>
+    /// Test si l'audio source existe dans le dictionnaire
+    /// Si il n'existe pas il l'ajoute
+    /// </summary>
+    /// <param name="audioSource"> AudioSource a tester</param>
+    private static void TestDico(AudioSource audioSource)
+    {
+        if (!fadeisRun.ContainsKey(audioSource))
+        {
+            fadeisRun.Add(audioSource, false);
         }
     }
 }

@@ -22,6 +22,7 @@ public class AttractionTool : NetworkBehaviour
             return;
 
         faceOverlay = Instantiate(prefabFaceOverlay);
+        DontDestroyOnLoad(faceOverlay);
         weapon = GetComponent<BaseWeapon>();
         playerWeight = GetComponent<Weight>();
         movementController = GetComponent<PlayerMovementController>();
@@ -42,8 +43,7 @@ public class AttractionTool : NetworkBehaviour
                 
                 if (touchedObject != null)
                 {
-                    CalculateHitNormal();
-                    GetComponent<SoundPlayerManage>().StartOverlay();
+                    CalculateHitNormal();                   
                     UpdateOverlay();
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -61,21 +61,22 @@ public class AttractionTool : NetworkBehaviour
                     }
                 }
                 else
-                {
-                    GetComponent<SoundPlayerManage>().StopOverlay();
+                {                    
                     faceOverlay.SetActive(false);
+                    GetComponent<SoundPlayerManage>().StopOverlay();
                 }
             }
             else
             {
                 faceOverlay.SetActive(false);
+                GetComponent<SoundPlayerManage>().StopOverlay();
             }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            GetComponent<SoundPlayerManage>().StopOverlay();
+        {            
             weapon.enabled = true;
             faceOverlay.SetActive(false);
+            GetComponent<SoundPlayerManage>().StopOverlay();
         }
     }
 
@@ -139,6 +140,7 @@ public class AttractionTool : NetworkBehaviour
         faceOverlay.transform.localScale = hit.transform.localScale;
 
         faceOverlay.SetActive(true);
+        GetComponent<SoundPlayerManage>().StartOverlay();
     }
 
     private void CalculateHitNormal()

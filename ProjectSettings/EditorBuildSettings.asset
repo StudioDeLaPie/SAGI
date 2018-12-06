@@ -25,6 +25,9 @@ EditorBuildSettings:
     guid: b795c705e2b66c644a442c85b318f5c2
   - enabled: 1
     path: Assets/Scenes/LevelMulti1.unity
+    guid: 5c8e467042bb58b41a5bd280480ca826
+  - enabled: 1
+    path: Assets/Scenes/LevelMulti1.1.unity
     guid: 30ae7e91117ded64cb01c375546863ca
   - enabled: 1
     path: Assets/Scenes/LevelMulti2.unity

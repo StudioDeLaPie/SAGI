@@ -109,6 +109,7 @@ public class PlayerMovementController : NetworkBehaviour
     private Weight playerWeight;
     [SerializeField, Range(0f, 1f)] private float decelerationPercentage = 0.1f;
 
+    private UIManager UIManager;
 
     private void Start()
     {
@@ -116,8 +117,10 @@ public class PlayerMovementController : NetworkBehaviour
         playerWeight = GetComponent<Weight>();
 
         if (!isLocalPlayer)
-            return;
+            return;        
         mouseLook.Init(transform, cam.transform);
+
+        UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
     }
 
 
@@ -131,7 +134,8 @@ public class PlayerMovementController : NetworkBehaviour
         if (Input.GetButtonDown("Jump") && !m_Jump)
         {
             m_Jump = true;
-        }        
+        }
+        
     }
 
     private void FixedUpdate()

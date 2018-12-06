@@ -10,6 +10,8 @@ AudioMixerController:
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
   - {fileID: 24500006}
+  - {fileID: 245139522710427686}
+  - {fileID: 245648542634706886}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 0
@@ -20,9 +22,6 @@ AudioMixerController:
     - 6bd0783f6744801449a17d7de690fe93
     - 983acc074e962234a90a5b16532947ff
     - 468932b350db3834b8cf4a4a389af313
-    - 9e35b4d60a755c84489d278e816022a0
-    - 37405fa38ff844742acf36fdee3d1150
-    - ba3d7b0982ef19842a414824b62b543f
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -64,14 +63,15 @@ AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Snapshot
+  m_Name: Normale
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 5addbf278cc30974589addb06a0b574d
   m_FloatValues:
     c2751840a4d2165449e64fc4c66d65c2: -9.960266
-    e3a8a5e3d6ffaa54590bb11a0bc472a5: 0.025578067
+    e3a8a5e3d6ffaa54590bb11a0bc472a5: -5.8241854
     82ebe5e36090b8948872df885a425fc9: -4.1973577
     77846d24eb3f9b84b92a045ebc58b4ef: -12.498478
+    5bf9012bda09334468a666f010747c4a: 0.025578512
   m_TransitionOverrides: {}
 --- !u!243 &243397692423900222
 AudioMixerGroupController:
@@ -225,3 +225,31 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!245 &245139522710427686
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Equivalent1
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: a157cf24cbdb10a4a8534f5ba4fc7ac1
+  m_FloatValues:
+    c2751840a4d2165449e64fc4c66d65c2: -58.54682
+    e3a8a5e3d6ffaa54590bb11a0bc472a5: -5.8241854
+    82ebe5e36090b8948872df885a425fc9: -4.1973577
+    77846d24eb3f9b84b92a045ebc58b4ef: -12.498478
+  m_TransitionOverrides: {}
+--- !u!245 &245648542634706886
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Equivalent2
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 01860670802139045b2f66ed88e58078
+  m_FloatValues:
+    c2751840a4d2165449e64fc4c66d65c2: -9.960263
+    e3a8a5e3d6ffaa54590bb11a0bc472a5: 0.10800299
+    82ebe5e36090b8948872df885a425fc9: -4.1973577
+    77846d24eb3f9b84b92a045ebc58b4ef: -12.498478
+  m_TransitionOverrides: {}

@@ -19,13 +19,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text ip;
     [SerializeField] private Text port;
 
-
     GameManager gameManager;
-    string pathGameManager = "Prefabs/GameManager";
+
+    private GameObject previousUIOptions;
+
+    private GameObject actifMenu;
+
+    private UIPlayerManager localPlayer;
+
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        actifMenu = _UIMainMenu;
+        
+        
     }
 
     #region UI_Loading
@@ -34,12 +42,14 @@ public class UIManager : MonoBehaviour
         soundManager.ShotDefaultUISound();
         _UILoading.SetActive(false);
         _UIConnection.SetActive(true);
+        actifMenu = null;
     }
 
     //Utilisé par le customNetworckManager pour enlever la fenetre de chargement
     public void DisableLoading()
     {
         _UILoading.SetActive(false);
+        actifMenu = null;
     }
     #endregion
 
@@ -54,7 +64,9 @@ public class UIManager : MonoBehaviour
         NetworkManager.singleton.onlineScene = "Level1";
         NetworkManager.singleton.maxConnections = 1;
         NetworkManager.singleton.StartHost();
+        SetCusrorVisible(false);
         _UIMainMenu.SetActive(false);
+        actifMenu = null;
     }
 
     public void MultiplayerClick()
@@ -62,20 +74,33 @@ public class UIManager : MonoBehaviour
         soundManager.ShotDefaultUISound();
         _UIMainMenu.SetActive(false);
         _UIConnection.SetActive(true);
+        actifMenu = _UIConnection;
     }
 
-    public void OptionsClick()
+
+    public void OptionsClick(GameObject previousUI)
     {
-        soundManager.ShotDefaultUISound();
-        _UIMainMenu.SetActive(false);
+        if (previousUI == _UIMainMenu)
+        {
+            _UIMainMenu.SetActive(false);
+        }
+        else if (previousUI == _UIPauseMenu)
+        {
+            _UIPauseMenu.SetActive(false);
+        }
+        else
+            Debug.LogError("L'affichage de l'UI Option ne sait pas d'ou il vient. Renseignez la précedente UI");
+        actifMenu = _UIOptions;
+        previousUIOptions = previousUI;
         _UIOptions.SetActive(true);
+        soundManager.ShotDefaultUISound();
+
     }
 
     public void ExitClick()
     {
         Application.Quit();
     }
-
     #endregion
 
     #region UI_Connection
@@ -87,7 +112,9 @@ public class UIManager : MonoBehaviour
         gameManager.Multi = true;
         NetworkManager.singleton.onlineScene = "LevelMulti1";
         NetworkManager.singleton.StartHost();
+        SetCusrorVisible(false);
         _UIConnection.SetActive(false);
+        actifMenu = null;
     }
 
     public void OnError(NetworkMessage msg)
@@ -110,6 +137,7 @@ public class UIManager : MonoBehaviour
         NetworkManager.singleton.StartClient();
         _UIConnection.SetActive(false);
         _UILoading.SetActive(true);
+        actifMenu = _UILoading;
     }
 
     public void BackConnectionClick()
@@ -117,15 +145,101 @@ public class UIManager : MonoBehaviour
         soundManager.ShotDefaultUISound();
         _UIConnection.SetActive(false);
         _UIMainMenu.SetActive(true);
+        actifMenu = _UIMainMenu;
     }
     #endregion
 
     #region UI_Options
     public void BackOptionClick()
     {
-        soundManager.ShotDefaultUISound();
+        if (previousUIOptions == _UIMainMenu)
+        {
+            _UIMainMenu.SetActive(true);
+            actifMenu = _UIMainMenu;
+        }
+        else if (previousUIOptions == _UIPauseMenu)
+        {
+            _UIPauseMenu.SetActive(true);
+            actifMenu = _UIPauseMenu;
+        }
+        else
+            Debug.LogError("L'affichage de l'UI Option ne sait pas d'ou il vient. Renseignez la précedente UI");
+
+
         _UIOptions.SetActive(false);
-        _UIMainMenu.SetActive(true);
+        soundManager.ShotDefaultUISound();
     }
     #endregion
+
+    #region UI_PauseMenu
+    public void DrawPauseMenu()
+    {
+        if (actifMenu == null)
+        {
+            SetCusrorVisible(true);
+            _UIPauseMenu.SetActive(true);
+            actifMenu = _UIPauseMenu;
+            soundManager.ShotDefaultUISound();
+        }
+    }
+
+    public void ResumePauseMenuClick()
+    {
+        _UIPauseMenu.SetActive(false);
+        Debug.Log("ici");
+        SetCusrorVisible(false);
+        LocalPlayer.SetVisibleHUD(true);
+        LocalPlayer.PauseMenuisActif = false;
+        actifMenu = null;
+        SetCusrorVisible(false);
+        soundManager.ShotDefaultUISound();
+    }
+
+    public void GoMainMenuFromPauseMenuClick()
+    {
+        //actifMenu = _UIMainMenu;
+    }
+
+    #endregion
+
+    private void SetCusrorVisible(bool isVisible)
+    {
+        if (isVisible)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        Cursor.visible = isVisible;
+        Debug.Log(isVisible);
+    }
+
+    public GameObject ActifMenu
+    {
+        get
+        {
+            return actifMenu;
+        }
+
+        set
+        {
+            actifMenu = value;
+        }
+    }
+
+    public UIPlayerManager LocalPlayer
+    {
+        get
+        {
+            return localPlayer;
+        }
+
+        set
+        {
+            localPlayer = value;
+            SetCusrorVisible(false);
+        }
+    }
 }
