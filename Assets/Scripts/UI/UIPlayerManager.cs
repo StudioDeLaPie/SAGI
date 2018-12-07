@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIPlayerManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _UIReticule;    
+    [SerializeField] private GameObject _UIReticule;
+    [SerializeField] private RectTransform airControlImage;
+    [SerializeField] private Text txtWeight;
+
+    private PlayerMovementController controller;
+    private Weight weight;
     private UIManager _UIManager;
 
     private bool pauseMenuisActif = false;
@@ -13,6 +19,8 @@ public class UIPlayerManager : MonoBehaviour
     {
         _UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _UIManager.LocalPlayer = gameObject.GetComponent<UIPlayerManager>();
+        controller = GetComponent<PlayerMovementController>();
+        weight = GetComponent<Weight>();
     }
 
     void Update()
@@ -32,6 +40,12 @@ public class UIPlayerManager : MonoBehaviour
                 pauseMenuisActif = false;
             }
         }
+    }
+
+    void LateUpdate()
+    {
+        airControlImage.localScale = new Vector3(1, controller.airControl.currentAC / 100, 1);
+        txtWeight.text = weight.CurrentWeight.ToString();
     }
 
     public void SetVisibleHUD(bool visible)

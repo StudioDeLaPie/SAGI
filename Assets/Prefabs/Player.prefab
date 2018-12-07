@@ -493,7 +493,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224799307040817978}
-  - component: {fileID: 114137317369290512}
   m_Layer: 10
   m_Name: pnl_AirControl
   m_TagString: Untagged
@@ -1862,19 +1861,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _UIReticule: {fileID: 1119966564572472}
-  _UIManager: {fileID: 0}
---- !u!114 &114137317369290512
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1987803885457044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6eb19c2d7e650842afa3a888aa1d737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   airControlImage: {fileID: 224496309968351254}
+  txtWeight: {fileID: 114496217374980432}
 --- !u!114 &114156463462788842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2109,7 +2097,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weightMultiplier: 200
   currentWeight: 0
-  txtWeight: {fileID: 114496217374980432}
 --- !u!114 &114752416732860286
 MonoBehaviour:
   m_ObjectHideFlags: 1

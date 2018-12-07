@@ -11,7 +11,7 @@ public class Weight : NetworkBehaviour
     //ConnectionPlayer connectionPlayer;
 
     [SerializeField, SyncVar] private int currentWeight;
-    [SerializeField] private Text txtWeight;
+    
     private Rigidbody rb;
 
     public int CurrentWeight
@@ -29,6 +29,7 @@ public class Weight : NetworkBehaviour
             return maxWeight;
         }
     }
+
 
     private void Awake()
     {
@@ -54,8 +55,7 @@ public class Weight : NetworkBehaviour
             if (Input.GetKeyDown(KeyCode.F))
                 CmdIncreaseWeight();
             else if (Input.GetKeyDown(KeyCode.G))
-                CmdDecreaseWeight();
-            UpdateDisplay();
+                CmdDecreaseWeight();           
         }
     }
 
@@ -156,11 +156,5 @@ public class Weight : NetworkBehaviour
 
         rb.velocity = Vector3.zero;
         rb.AddForce(hitNormal, ForceMode.Impulse); //Application de la force
-    }
-
-    private void UpdateDisplay()
-    {
-        if (gameObject.transform.tag == "Player")
-            txtWeight.text = currentWeight.ToString();
     }
 }
