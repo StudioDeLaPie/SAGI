@@ -47,14 +47,14 @@ public class AttractionTool : NetworkBehaviour
                     UpdateOverlay();
                     if (Input.GetMouseButtonDown(0))
                     {
-                        GetComponent<SoundPlayerManage>().ShotExpulse();
+                        GetComponent<SoundPlayerManager>().ShotExpulse();
                         movementController.DisableAirControl(2);
                         playerWeight.Attraction(hitNormal);
                         CmdRepulsion(touchedObject.GetComponent<NetworkIdentity>(), hitNormal);
                     }
                     else if (Input.GetMouseButtonDown(1))
                     {
-                        GetComponent<SoundPlayerManage>().ShotImpulse();
+                        GetComponent<SoundPlayerManager>().ShotImpulse();
                         movementController.DisableAirControl(2);
                         playerWeight.Repulsion(hitNormal);
                         CmdAttraction(touchedObject.GetComponent<NetworkIdentity>(), hitNormal);
@@ -63,20 +63,20 @@ public class AttractionTool : NetworkBehaviour
                 else
                 {                    
                     faceOverlay.SetActive(false);
-                    GetComponent<SoundPlayerManage>().StopOverlay();
+                    GetComponent<SoundPlayerManager>().StopOverlay();
                 }
             }
             else
             {
                 faceOverlay.SetActive(false);
-                GetComponent<SoundPlayerManage>().StopOverlay();
+                GetComponent<SoundPlayerManager>().StopOverlay();
             }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {            
             weapon.enabled = true;
             faceOverlay.SetActive(false);
-            GetComponent<SoundPlayerManage>().StopOverlay();
+            GetComponent<SoundPlayerManager>().StopOverlay();
         }
     }
 
@@ -140,7 +140,7 @@ public class AttractionTool : NetworkBehaviour
         faceOverlay.transform.localScale = hit.transform.localScale;
 
         faceOverlay.SetActive(true);
-        GetComponent<SoundPlayerManage>().StartOverlay();
+        GetComponent<SoundPlayerManager>().StartOverlay();
     }
 
     private void CalculateHitNormal()

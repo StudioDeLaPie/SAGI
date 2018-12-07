@@ -165,7 +165,7 @@ public class PlayerMovementController : NetworkBehaviour
                 if (m_RigidBody.velocity.sqrMagnitude <
                     (movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
                 {
-                    GetComponent<SoundPlayerManage>().StartDeplacement();
+                    GetComponent<SoundPlayerManager>().StartDeplacement();
                     //Debug.Log("Start");
                     m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);
                 }
@@ -173,7 +173,7 @@ public class PlayerMovementController : NetworkBehaviour
         }
         else
         {
-            GetComponent<SoundPlayerManage>().StopDeplacement();
+            GetComponent<SoundPlayerManager>().StopDeplacement();
             //Debug.Log("Stop");
         }
 

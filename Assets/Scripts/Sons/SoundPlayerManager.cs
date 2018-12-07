@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundPlayerManage : MonoBehaviour
+public class SoundPlayerManager : MonoBehaviour
 {
     [SerializeField] private AudioSource impulse;
     [SerializeField] private AudioSource expulse;
