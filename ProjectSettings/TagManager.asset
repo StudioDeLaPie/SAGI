@@ -24,8 +24,8 @@ TagManager:
   - Player
   - Cube
   - BlockPlayer
-  - 
-  - 
+  - Arena
+  - CubeSphereCollider
   - 
   - 
   - 

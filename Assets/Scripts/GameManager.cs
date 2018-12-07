@@ -10,7 +10,7 @@ public class GameManager : NetworkBehaviour
     private string nameSceneMulti = "LevelMulti";
     private string nameSceneSolo = "Level";
 
-    [HideInInspector] public Dictionary<NetworkConnection, Vector3> playersCoordinatesInCorridor = null;
+    [HideInInspector] public List<Corridor.PlayerPositionInCorridor> playersCoordinatesInCorridor = null;
 
     private bool multi;
 
@@ -52,9 +52,17 @@ public class GameManager : NetworkBehaviour
         currentLevel++;
     }
 
-    public void LoadCurrentLevel()
+    public void ResetLevel()
     {
         NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Debug.Log("Rechargement du niveau");
+            ResetLevel();
+        }
+    }
 }

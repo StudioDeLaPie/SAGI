@@ -6,23 +6,37 @@ using UnityEngine.Networking;
 
 public class Corridor : NetworkBehaviour//MonoBehaviour//
 {
+    public struct PlayerPositionInCorridor
+    {
+        public NetworkConnection playerConnection;
+        public Vector3 position;
+        public Vector3 direction;
+        public PlayerPositionInCorridor(NetworkConnection connection, Vector3 pos, Vector3 dir)
+        {
+            playerConnection = connection;
+            position = pos;
+            direction = dir;
+        }
+    }
 
     public bool isEntry;
     public bool isExit;
     private bool isLocked { get { return !isEntry && !isExit; } }
 
-    [SerializeField] private Animator entryDoorAnimator;
-    [SerializeField] private Animator exitDoorAnimator;
+    [SerializeField] private Animator doorAnimator;
 
     private List<PlayerMovementController> playersInside;
     [HideInInspector] public UnityEvent bothPlayersInsideEvent;
 
+    public bool IsReady()
+    {
+        return doorAnimator.isActiveAndEnabled && ClientScene.ready;
+    }
 
     // Use this for initialization
     void Awake()
     {
-        entryDoorAnimator.SetBool("open", false);
-        exitDoorAnimator.SetBool("open", false);
+        Debug.Log(gameObject.name + " Awake : " + Time.time);
         if (isLocked)
         {
             GetComponent<BoxCollider>().enabled = false;
@@ -31,42 +45,33 @@ public class Corridor : NetworkBehaviour//MonoBehaviour//
         }
         else
         {
-            if (isEntry)
-                GetComponent<NetworkAnimator>().animator = exitDoorAnimator;
-            else
-                GetComponent<NetworkAnimator>().animator = entryDoorAnimator;
-            GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
             playersInside = new List<PlayerMovementController>();
         }
-        Debug.Log(gameObject.name + " Awake : " + Time.time);
     }
 
-    private void Start()
-    {
-        Debug.Log(gameObject.name + " Start : " + Time.time);
-        //if (!isServer)
-        //    enabled = false;
-
-    }
+    //private void Update()
+    //{
+    //    if (isEntry && playersInside.Count > 0)
+    //    {
+    //        Vector3 directionGet = transform.InverseTransformPoint(playersInside[0].transform.TransformPoint(Vector3.forward));
+    //        //Debug.Log("Forward perso : " + playersInside[0].transform.TransformPoint(Vector3.forward));
+    //        Debug.Log("Get : " + directionGet + "  Set : " + transform.TransformPoint(directionGet));
+    //    }
+    //}
 
     #region Door Management
-    public void EntryDoorState(bool open)
+    public void OpenDoor()
     {
-        ChangeDoorState(true, open);
+        ChangeDoorState(true);
+    }
+    public void CloseDoor()
+    {
+        ChangeDoorState(false);
     }
 
-    public void ExitDoorState(bool open)
+    private void ChangeDoorState(bool open)
     {
-        Debug.Log("changement d'état de la porte de sortie " + gameObject.name);
-        ChangeDoorState(false, open);
-    }
-
-    private void ChangeDoorState(bool isEntry, bool open)
-    {
-        if (isEntry)
-            entryDoorAnimator.SetBool("open", open);
-        else
-            exitDoorAnimator.SetBool("open", open);
+        doorAnimator.SetBool("open", open);
     }
     #endregion
 
@@ -75,32 +80,36 @@ public class Corridor : NetworkBehaviour//MonoBehaviour//
         return playersInside.Count == 2;
     }
 
-    public Dictionary<NetworkConnection, Vector3> GetPlayersLocalCoordinates()
+    public List<PlayerPositionInCorridor> GetPlayersLocalCoordinates()
     {
-        Dictionary<NetworkConnection, Vector3> result = new Dictionary<NetworkConnection, Vector3>();
+        List<PlayerPositionInCorridor> result = new List<PlayerPositionInCorridor>();
 
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        foreach (PlayerMovementController player in playersInside)
         {
-            NetworkConnection netId = player.GetComponent<NetworkIdentity>().connectionToClient;
-            //if (netId.isServer)
-            result.Add(netId, transform.InverseTransformPoint(player.transform.position));
-            //else
-            //result.Add(netId, transform.InverseTransformPoint(player.GetComponent<ConnectionPlayer>().RpcGetPosition()));
+            PlayerPositionInCorridor playerPosition = new PlayerPositionInCorridor();
+
+            playerPosition.playerConnection = player.GetComponent<NetworkIdentity>().connectionToClient;
+            playerPosition.position = transform.InverseTransformPoint(player.transform.position);
+            playerPosition.direction = transform.InverseTransformPoint(playersInside[0].transform.TransformPoint(Vector3.forward));
+            result.Add(playerPosition);
         }
         return result;
     }
 
-    public void SetPlayersLocalCoordinates(Dictionary<NetworkConnection, Vector3> playersCoor)
+    public void SetPlayersLocalCoordinates(List<PlayerPositionInCorridor> playersCoor)
     {
-        foreach (KeyValuePair<NetworkConnection, Vector3> pair in playersCoor)
+        foreach (PlayerPositionInCorridor playerInCor in playersCoor)
         {
-            if (pair.Key.playerControllers[0].unetView.isServer)
-                pair.Key.playerControllers[0].unetView.GetComponent<Transform>().position = transform.TransformPoint(pair.Value);
-            else
-                pair.Key.playerControllers[0].unetView.GetComponent<ConnectionPlayer>().RpcSetPosition(transform.TransformPoint(pair.Value));
+            playerInCor.position.Set(-playerInCor.position.x, playerInCor.position.y, -playerInCor.position.z);
+            playerInCor.direction.Set(-playerInCor.direction.x, playerInCor.direction.y, -playerInCor.direction.z);
+            NetworkIdentity playerNetId = playerInCor.playerConnection.playerControllers[0].unetView;
+            playerNetId.GetComponent<ConnectionPlayer>().RpcSetPositionAndDirection(transform.TransformPoint(playerInCor.position), transform.TransformPoint(playerInCor.direction));
+            //playerNetId.GetComponent<ConnectionPlayer>().RpcSetPositionAndDirection(Vector3.up, Vector3.forward);
         }
     }
 
+
+    #region Trigger
     private void OnTriggerEnter(Collider other)
     {
         PlayerMovementController controller = other.GetComponent<PlayerMovementController>();
@@ -122,9 +131,5 @@ public class Corridor : NetworkBehaviour//MonoBehaviour//
             playersInside.Remove(controller);
         }
     }
-
-    public bool IsReady()
-    {
-        return entryDoorAnimator.isActiveAndEnabled && exitDoorAnimator.isActiveAndEnabled;
-    }
+    #endregion
 }

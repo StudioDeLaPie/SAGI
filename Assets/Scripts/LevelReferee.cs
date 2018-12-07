@@ -14,7 +14,7 @@ public class LevelReferee : NetworkBehaviour
     private GameManager gameManager;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         if (receptaclesCube.Count <= 0 || entryCorridor == null || exitCorridor == null)
         {
@@ -26,16 +26,9 @@ public class LevelReferee : NetworkBehaviour
             receptacle.activateEvent.AddListener(UpdateWinConditions);
         }
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        Debug.Log("Referee start : " + Time.time);
+
         StartCoroutine(OpenEntryCorridor());
-        exitCorridor.bothPlayersInsideEvent.AddListener(PlayersInsideExitCorridor);
-        //Debug.Log("Couloir d'entrée ouvert");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        exitCorridor.bothPlayersInsideEvent.AddListener(NextScene);
     }
 
     private void UpdateWinConditions()
@@ -54,27 +47,51 @@ public class LevelReferee : NetworkBehaviour
     private void Win()
     {
         Debug.Log("Win");
-        exitCorridor.EntryDoorState(true);
+        exitCorridor.OpenDoor();
     }
 
-    private void PlayersInsideExitCorridor()
+    /// <summary>
+    /// Appelé lors de l'évènement "les 2 joueurs sont dans le tunnel de sortie"
+    /// </summary>
+    private void NextScene()
     {
-        exitCorridor.EntryDoorState(false);
+        if (isLevelFinished)
+            StartCoroutine(NextSceneCoroutine());
+    }
+
+    private IEnumerator NextSceneCoroutine()
+    {
+        exitCorridor.CloseDoor();
+        yield return new WaitForSeconds(3);
         gameManager.playersCoordinatesInCorridor = exitCorridor.GetPlayersLocalCoordinates();
         gameManager.LoadNextLevel();
     }
 
     private IEnumerator OpenEntryCorridor()
     {
-        bool test = false;
-        while (test != true)
+        bool everyoneReady = false;
+        while (!everyoneReady)
         {
-            test = entryCorridor.IsReady() && exitCorridor.IsReady();
-            Debug.Log("Test pour l'ouverture de la porte : " + Time.time);
+            everyoneReady = entryCorridor.IsReady() && exitCorridor.IsReady();
+            if (gameManager.playersCoordinatesInCorridor != null)
+            {
+                foreach (Corridor.PlayerPositionInCorridor player in gameManager.playersCoordinatesInCorridor)
+                {
+                    if (everyoneReady)
+                    {
+                        everyoneReady = player.playerConnection.isReady;
+                    }
+                }
+            }
+            Debug.Log("everyoneReady = " + everyoneReady + "  " + Time.time);
             yield return null;
         }
         if (gameManager.playersCoordinatesInCorridor != null)
+        {
+            Debug.Log("Placement des joueurs");
             entryCorridor.SetPlayersLocalCoordinates(gameManager.playersCoordinatesInCorridor);
-        entryCorridor.ExitDoorState(true);
+        }
+        Debug.Log("Ouverture de la porte : " + Time.time);
+        entryCorridor.OpenDoor();
     }
 }

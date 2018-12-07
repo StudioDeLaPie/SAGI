@@ -10,7 +10,7 @@ public class MaterialManager : NetworkBehaviour
     private string pathMaterials = "Materials/Cubes/";
     private Weight weight;
     [SyncVar] private int materialIndex;
-    private new MeshRenderer renderer;
+    [SerializeField] private new MeshRenderer renderer;
     private new Rigidbody rigidbody;
 
 
@@ -18,7 +18,6 @@ public class MaterialManager : NetworkBehaviour
     {
         Initialisation();
         weight = GetComponent<Weight>();
-        renderer = GetComponent<MeshRenderer>();
         rigidbody = GetComponent<Rigidbody>();
         UpdateMaterial();
         ChangeMaterial();

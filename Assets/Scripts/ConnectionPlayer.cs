@@ -55,16 +55,14 @@ public class ConnectionPlayer : NetworkBehaviour
         }
     }
 
-    //[ClientRpc]
-    //public Vector3 RpcGetPosition()
-    //{
-    //    return transform.position;
-    //}
-
     [ClientRpc]
-    public void RpcSetPosition(Vector3 position)
+    public void RpcSetPositionAndDirection(Vector3 position, Vector3 direction)
     {
+        GetComponent<PlayerMovementController>().enabled = false;
         transform.position = position;
+        direction.y = transform.position.y; //pour ne pas faire tourner le controller en X ou Z
+        transform.LookAt(direction);
+        GetComponent<PlayerMovementController>().enabled = true;
     }
 
     public void Die()

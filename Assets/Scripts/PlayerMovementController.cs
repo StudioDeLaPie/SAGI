@@ -109,14 +109,14 @@ public class PlayerMovementController : NetworkBehaviour
     private Weight playerWeight;
     [SerializeField, Range(0f, 1f)] private float decelerationPercentage = 0.1f;
 
-
     private void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
         playerWeight = GetComponent<Weight>();
+    }
 
-        if (!isLocalPlayer)
-            return;
+    private void OnEnable()
+    {
         mouseLook.Init(transform, cam.transform);
     }
 
