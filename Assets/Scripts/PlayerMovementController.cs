@@ -109,6 +109,8 @@ public class PlayerMovementController : NetworkBehaviour
     private Weight playerWeight;
     [SerializeField, Range(0f, 1f)] private float decelerationPercentage = 0.1f;
 
+    private UIManager UIManager;
+
     private void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
@@ -118,6 +120,8 @@ public class PlayerMovementController : NetworkBehaviour
     private void OnEnable()
     {
         mouseLook.Init(transform, cam.transform);
+
+        UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
     }
 
 
@@ -131,7 +135,8 @@ public class PlayerMovementController : NetworkBehaviour
         if (Input.GetButtonDown("Jump") && !m_Jump)
         {
             m_Jump = true;
-        }        
+        }
+
     }
 
     private void FixedUpdate()
@@ -162,7 +167,7 @@ public class PlayerMovementController : NetworkBehaviour
                 {
                     GetComponent<SoundPlayerManage>().StartDeplacement();
                     //Debug.Log("Start");
-                    m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);                    
+                    m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);
                 }
             }
         }
@@ -221,7 +226,7 @@ public class PlayerMovementController : NetworkBehaviour
     }
 
     private void ApplyDeceleration()
-    {        
+    {
         if (!airControl.Disabled)
         {
             if ((m_IsGrounded || m_IsRoofed || m_Jumpable) && !m_Jumping)

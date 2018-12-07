@@ -11,7 +11,7 @@ public class Weight : NetworkBehaviour
     //ConnectionPlayer connectionPlayer;
 
     [SerializeField, SyncVar] private int currentWeight;
-    [SerializeField] private Text txtWeight;
+    
     private Rigidbody rb;
 
     public int CurrentWeight
@@ -30,6 +30,7 @@ public class Weight : NetworkBehaviour
         }
     }
 
+
     private void Awake()
     {
         //connectionPlayer = GetComponent<ConnectionPlayer>();
@@ -38,10 +39,9 @@ public class Weight : NetworkBehaviour
 
     private void Start()
     {
-        if (gameObject.tag == "Player" && isLocalPlayer)
+        if (gameObject.tag == "Player" && isServer)
         {
-            CmdIncreaseWeight();
-            txtWeight.text = currentWeight.ToString();
+            currentWeight = 1;
         }
     }
 
@@ -55,8 +55,7 @@ public class Weight : NetworkBehaviour
             if (Input.GetKeyDown(KeyCode.F))
                 CmdIncreaseWeight();
             else if (Input.GetKeyDown(KeyCode.G))
-                CmdDecreaseWeight();
-            UpdateDisplay();
+                CmdDecreaseWeight();           
         }
     }
 
@@ -71,7 +70,7 @@ public class Weight : NetworkBehaviour
         RpcSetKinematic(false);
         currentWeight++;
         currentWeight = Mathf.Clamp(currentWeight, minWeight, maxWeight);
-        //RpcUpdateDisplay();
+        RpcChangeWeightSound(true);
     }
 
     [Command]
@@ -80,31 +79,51 @@ public class Weight : NetworkBehaviour
         RpcSetKinematic(false);
         currentWeight--;
         currentWeight = Mathf.Clamp(currentWeight, minWeight, maxWeight);
-        //RpcUpdateDisplay();
+        RpcChangeWeightSound(false);
     }
 
     [Command]
     public void CmdStop()
     {
-        RpcSetKinematic(true);
-        RpcSetKinematic(false);
         currentWeight = 0;
-        //RpcUpdateDisplay();
+        RpcStop();
     }
 
     [Command]
     public void CmdFreeze()
     {
-        CmdStop(); //Set le poids a zero et update l'affichage
-        RpcSetKinematic(true); //Freeze l'objet
+        currentWeight = 0;
+        RpcFreeze();
+    }
+
+    [ClientRpc]
+    private void RpcStop()
+    {
+        rb.isKinematic = true;
+        rb.isKinematic = false;
+        GetComponent<WeightSoundManager>().ShotStop();
+    }
+
+    [ClientRpc]
+    private void RpcFreeze()
+    {
+        rb.isKinematic = true;
+        GetComponent<WeightSoundManager>().ShotFreeze();
     }
 
     [ClientRpc]
     private void RpcSetKinematic(bool isKinematic)
     {
-        if (isKinematic)
-            rb.velocity = Vector3.zero;
         rb.isKinematic = isKinematic;
+    }
+
+    [ClientRpc]
+    private void RpcChangeWeightSound(bool increased)
+    {
+        if (increased)
+            GetComponent<WeightSoundManager>().ShotIncreasse();
+        else
+            GetComponent<WeightSoundManager>().ShotDecreasse();
     }
 
     /// <summary>
@@ -126,24 +145,16 @@ public class Weight : NetworkBehaviour
         Attraction(hitNormal);
     }
 
-    public void Attraction (Vector3 hitNormal)
+    public void Attraction(Vector3 hitNormal)
     {
         AttractionRepulsion(hitNormal, true);
     }
 
     private void AttractionRepulsion(Vector3 hitNormal, bool isAttracting)
     {
-        hitNormal = isAttracting ? hitNormal* 150f : hitNormal * -150f; //force de propulsion
+        hitNormal = isAttracting ? hitNormal * 150f : hitNormal * -150f; //force de propulsion
 
         rb.velocity = Vector3.zero;
         rb.AddForce(hitNormal, ForceMode.Impulse); //Application de la force
     }
-
-    private void UpdateDisplay()
-    {
-        if (gameObject.transform.tag == "Player")
-            txtWeight.text = currentWeight.ToString();
-    }
-
-
 }

@@ -25,26 +25,22 @@ public class BaseWeapon : NetworkBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                LocalFire(true);
-                GetComponent<SoundPlayerManage>().ShotWeaponLeft();
+                LocalFire(true);               
             }
 
             if (Input.GetMouseButtonDown(1))
             {
                 LocalFire(false);
-                GetComponent<SoundPlayerManage>().ShotWeaponRight();
             }
 
             if (Input.GetKeyDown(KeyCode.R))
             {
                 LocalFreeze();
-                GetComponent<SoundPlayerManage>().ShotFreeze();
             }
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             LocalStop();
-            GetComponent<SoundPlayerManage>().ShotStop();
         }
     }
 

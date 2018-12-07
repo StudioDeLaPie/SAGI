@@ -2,27 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class AudioController {
+public static class AudioController
+{
+    private static Dictionary<AudioSource, bool> fadeisRun = new Dictionary<AudioSource, bool>();    
 
-    public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
+    public static IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
     {
-        float startVolume = audioSource.volume;
-        while (audioSource.volume > 0)
+        TestDico(audioSource);
+
+        if (!fadeisRun[audioSource]) //On passe que si il n'y a pas de fade en cours
         {
-            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
-            yield return null;
+            fadeisRun[audioSource] = true;
+            float startVolume = audioSource.volume;
+            while (audioSource.volume > 0)
+            {
+                audioSource.volume -= startVolume * Time.deltaTime / fadeTime;
+                yield return null;
+            }
+
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            fadeisRun[audioSource] = false;
         }
-        audioSource.Stop();
     }
 
-    public static IEnumerator FadeIn(AudioSource audioSource, float FadeTime)
+    public static IEnumerator FadeIn(AudioSource audioSource, float fadeTime)
     {
-        audioSource.Play();
-        audioSource.volume = 0f;
-        while (audioSource.volume < 1)
+        TestDico(audioSource);
+
+        if (!fadeisRun[audioSource])
         {
-            audioSource.volume += Time.deltaTime / FadeTime;
-            yield return null;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+            //Debug.Log("DebutFadeIn");
+            fadeisRun[audioSource] = true;
+            while (audioSource.volume < 1)
+            {
+                audioSource.volume += Time.deltaTime / fadeTime;
+                yield return null;
+            }
+            audioSource.volume = 1;
+            fadeisRun[audioSource] = false;
+        }
+    }
+
+    /// <summary>
+    /// Test si l'audio source existe dans le dictionnaire
+    /// Si il n'existe pas il l'ajoute
+    /// </summary>
+    /// <param name="audioSource"> AudioSource a tester</param>
+    private static void TestDico(AudioSource audioSource)
+    {
+        if (!fadeisRun.ContainsKey(audioSource))
+        {
+            fadeisRun.Add(audioSource, false);
         }
     }
 }
