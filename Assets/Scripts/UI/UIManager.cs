@@ -32,8 +32,6 @@ public class UIManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         actifMenu = _UIMainMenu;
-
-
     }
 
     #region UI_Loading
@@ -175,30 +173,48 @@ public class UIManager : MonoBehaviour
     #region UI_PauseMenu
     public void DrawPauseMenu()
     {
-        if (actifMenu == null)
+        if (actifMenu == null) //Si il n'y a aucun menu actif on l'affiche
         {
-            SetCusrorVisible(true);
             _UIPauseMenu.SetActive(true);
+            SetCusrorVisible(true);
+            LocalPlayer.SetVisibleHUD(false);
+            LocalPlayer.PauseMenuisActif = true;
             actifMenu = _UIPauseMenu;
+            localPlayer.GetComponent<PlayerMovementController>().enabled = false;
             soundManager.ShotDefaultUISound();
         }
     }
 
     public void ResumePauseMenuClick()
     {
-        _UIPauseMenu.SetActive(false);
-        Debug.Log("ici");
-        SetCusrorVisible(false);
-        LocalPlayer.SetVisibleHUD(true);
+        _UIPauseMenu.SetActive(false); //Onefface le menuPause        
+        SetCusrorVisible(false); //on remmet le lock et on rend invisible le curseur
+        LocalPlayer.SetVisibleHUD(true); 
         LocalPlayer.PauseMenuisActif = false;
-        actifMenu = null;
-        SetCusrorVisible(false);
+        actifMenu = null; //On dit à l'UIManager qu'il n'y plus de menu courrant        
+        localPlayer.GetComponent<PlayerMovementController>().enabled = true;
         soundManager.ShotDefaultUISound();
     }
 
     public void GoMainMenuFromPauseMenuClick()
     {
-        //actifMenu = _UIMainMenu;
+        NetworkIdentity netId = LocalPlayer.GetComponent<NetworkIdentity>();
+
+        if (netId.isServer)
+            NetworkManager.singleton.StopHost();
+        else
+            NetworkManager.singleton.StopClient();
+        soundManager.ShotDefaultUISound();
+
+        _UIPauseMenu.SetActive(false);
+        _UIMainMenu.SetActive(true);
+        actifMenu = _UIMainMenu;
+        localPlayer.PauseMenuisActif = false;
+    }
+
+    public void RestartPauseMenuClick()
+    {
+        gameManager.ResetLevel();
     }
 
     #endregion
@@ -213,8 +229,7 @@ public class UIManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
-        Cursor.visible = isVisible;
-        Debug.Log(isVisible);
+        Cursor.visible = isVisible;        
     }
 
     public GameObject ActifMenu

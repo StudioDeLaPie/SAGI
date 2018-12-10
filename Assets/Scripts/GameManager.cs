@@ -14,6 +14,24 @@ public class GameManager : NetworkBehaviour
 
     private bool multi;
 
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void LoadNextLevel()
+    {
+        int temp = currentLevel + 1;            
+        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + temp);
+        currentLevel++;
+    }
+
+    public void ResetLevel()
+    {
+        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);
+    }        
+
     public int CurrentLevel
     {
         get
@@ -37,32 +55,6 @@ public class GameManager : NetworkBehaviour
         set
         {
             multi = value;
-        }
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public void LoadNextLevel()
-    {
-        int temp = currentLevel + 1;            
-        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + temp);
-        currentLevel++;
-    }
-
-    public void ResetLevel()
-    {
-        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log("Rechargement du niveau");
-            ResetLevel();
         }
     }
 }
