@@ -1769,7 +1769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1944129307155160
 GameObject:
   m_ObjectHideFlags: 1
@@ -2648,7 +2648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.392}
+  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.8745098}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3550,7 +3550,7 @@ MonoBehaviour:
   _UIOptions: {fileID: 1693093504553304}
   _UILoading: {fileID: 1709420838450420}
   _UIPauseMenu: {fileID: 1662749876857898}
-  _gameManager: {fileID: 1398958547694540, guid: 554b498c199b508468b62c49ff192da3,
+  _PrefabGameManager: {fileID: 1398958547694540, guid: 554b498c199b508468b62c49ff192da3,
     type: 2}
   soundManager: {fileID: 0}
   ip: {fileID: 114884577861471342}

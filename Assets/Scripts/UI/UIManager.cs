@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _UIOptions;
     [SerializeField] private GameObject _UILoading;
     [SerializeField] private GameObject _UIPauseMenu;
-    [SerializeField] private GameObject _gameManager;
+    [SerializeField] private GameObject _PrefabGameManager;
     [SerializeField] private SoundManager soundManager;
 
     [SerializeField] private Text ip;
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     private GameObject actifMenu;
 
-    private UIPlayerManager localPlayer;
+    private UIPlayerManager _UIlocalPlayer;
 
 
     private void Start()
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     public void TutorielClick()
     {
         soundManager.ShotConnectionUISound();
-        gameManager = GameObject.Instantiate(_gameManager).GetComponent<GameManager>();
+        gameManager = GameObject.Instantiate(_PrefabGameManager).GetComponent<GameManager>();
         gameManager.CurrentLevel = 1;
         NetworkManager.singleton.networkAddress = "127.0.0.1";
         NetworkManager.singleton.networkPort = 7777;
@@ -105,7 +105,7 @@ public class UIManager : MonoBehaviour
     public void HostClick()
     {
         soundManager.ShotConnectionUISound();
-        gameManager = GameObject.Instantiate(_gameManager).GetComponent<GameManager>();
+        gameManager = GameObject.Instantiate(_PrefabGameManager).GetComponent<GameManager>();
         gameManager.CurrentLevel = 1;
         gameManager.Multi = true;
         NetworkManager.singleton.onlineScene = "LevelMulti1";
@@ -180,7 +180,7 @@ public class UIManager : MonoBehaviour
             LocalPlayer.SetVisibleHUD(false);
             LocalPlayer.PauseMenuisActif = true;
             actifMenu = _UIPauseMenu;
-            localPlayer.GetComponent<PlayerMovementController>().enabled = false;
+            SetAvtivePlayerComponents(false);
             soundManager.ShotDefaultUISound();
         }
     }
@@ -192,7 +192,7 @@ public class UIManager : MonoBehaviour
         LocalPlayer.SetVisibleHUD(true); 
         LocalPlayer.PauseMenuisActif = false;
         actifMenu = null; //On dit à l'UIManager qu'il n'y plus de menu courrant        
-        localPlayer.GetComponent<PlayerMovementController>().enabled = true;
+        SetAvtivePlayerComponents(true);
         soundManager.ShotDefaultUISound();
     }
 
@@ -209,7 +209,7 @@ public class UIManager : MonoBehaviour
         _UIPauseMenu.SetActive(false);
         _UIMainMenu.SetActive(true);
         actifMenu = _UIMainMenu;
-        localPlayer.PauseMenuisActif = false;
+        _UIlocalPlayer.PauseMenuisActif = false;
     }
 
     public void RestartPauseMenuClick()
@@ -249,13 +249,20 @@ public class UIManager : MonoBehaviour
     {
         get
         {
-            return localPlayer;
+            return _UIlocalPlayer;
         }
 
         set
         {
-            localPlayer = value;
+            _UIlocalPlayer = value;
             SetCusrorVisible(false);
         }
+    }
+
+    public void SetAvtivePlayerComponents(bool enable)
+    {
+        _UIlocalPlayer.GetComponent<PlayerMovementController>().enabled = enable;
+        _UIlocalPlayer.GetComponent<BaseWeapon>().enabled = enable;
+        _UIlocalPlayer.GetComponent<AttractionTool>().enabled = enable;
     }
 }
