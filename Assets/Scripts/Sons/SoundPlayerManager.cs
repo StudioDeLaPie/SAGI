@@ -19,13 +19,13 @@ public class SoundPlayerManager : MonoBehaviour
     public void ShotImpulse()
     {
         impulse.PlayOneShot(impulse.clip);
-        overlay.Stop();
+        //overlay.Stop();
     }
 
     public void ShotExpulse()
     {
         expulse.PlayOneShot(expulse.clip);
-        overlay.Stop();
+        //overlay.Stop();
     }
 
     public void StartDeplacement()

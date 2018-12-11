@@ -45,20 +45,6 @@ public class Weight : NetworkBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (!isLocalPlayer)
-            return;
-
-        if (gameObject.tag == "Player")
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-                CmdIncreaseWeight();
-            else if (Input.GetKeyDown(KeyCode.G))
-                CmdDecreaseWeight();           
-        }
-    }
-
     private void FixedUpdate()
     {
         rb.AddForce(0, -(currentWeight * weightMultiplier), 0);

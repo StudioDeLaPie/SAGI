@@ -45,7 +45,7 @@ public class GameManager : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadNextLevel()
+    public void LoadLevel(string levelName)
     {
         int temp = currentLevel + 1;            
         NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + temp);
@@ -55,14 +55,5 @@ public class GameManager : NetworkBehaviour
     public void ResetLevel()
     {
         NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log("Rechargement du niveau");
-            ResetLevel();
-        }
     }
 }

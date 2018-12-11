@@ -362,6 +362,11 @@ Prefab:
       propertyPath: m_Name
       value: EntryCorridor
       objectReference: {fileID: 0}
+    - target: {fileID: 114778703405580438, guid: 330987ffa84fa6e48bfe804e3167de2a,
+        type: 2}
+      propertyPath: isEntry
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
   m_IsPrefabAsset: 0
@@ -492,17 +497,17 @@ Prefab:
     - target: {fileID: 114316997507823834, guid: bb442dda07b821e4eb99e707e6fa215b,
         type: 2}
       propertyPath: receptaclesCube.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 1723328666}
     - target: {fileID: 114316997507823834, guid: bb442dda07b821e4eb99e707e6fa215b,
         type: 2}
       propertyPath: entryCorridor
-      value:
+      value: 
       objectReference: {fileID: 2074042480}
     - target: {fileID: 114316997507823834, guid: bb442dda07b821e4eb99e707e6fa215b,
         type: 2}
       propertyPath: exitCorridor
-      value:
+      value: 
       objectReference: {fileID: 1243715834}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb442dda07b821e4eb99e707e6fa215b, type: 2}
@@ -848,8 +853,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4096094708299744a87c038a690cb450, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   activated: 0
   activateEvent:
     m_PersistentCalls:
@@ -881,8 +886,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1050975500, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1848218896
 Transform:
   m_ObjectHideFlags: 0
@@ -894,7 +899,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
 --- !u!1 &2015547313
 GameObject:
@@ -921,8 +926,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1050975500, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2015547315
 Transform:
   m_ObjectHideFlags: 0
@@ -934,7 +939,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
 --- !u!114 &2074042480 stripped
 MonoBehaviour:

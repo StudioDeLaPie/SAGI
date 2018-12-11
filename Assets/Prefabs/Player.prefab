@@ -1887,6 +1887,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5744e8ea2d61ad2499cf01c39d30f811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 11265
   firePoint: {fileID: 4396602368286098}
   prefabFaceOverlay: {fileID: 1135376714448996, guid: 0bb976a12457ac547b1bf4554dffdbca,
     type: 2}
@@ -1955,6 +1958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af436bd1f7a27048b910dff5d299d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 11265
   cooldown: 0.1
   firePoint: {fileID: 4396602368286098}
 --- !u!114 &114490927797598898
