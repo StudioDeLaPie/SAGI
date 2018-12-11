@@ -25,19 +25,17 @@ public class UIPlayerManager : MonoBehaviour
 
     void Update()
     {
+        //Echap
         if (Input.GetButtonDown("Cancel"))
         {
+            //Si le menu pause n'est pas affiché
             if (!pauseMenuisActif)
             {
-                _UIManager.DrawPauseMenu();
-                SetVisibleHUD(false);
-                pauseMenuisActif = true;
+                _UIManager.DrawPauseMenu(); //On demande à l'UIManager de l'afficher               
             }
             else
             {
-                _UIManager.ResumePauseMenuClick();
-                SetVisibleHUD(true);
-                pauseMenuisActif = false;
+                _UIManager.ResumePauseMenuClick(); //Sinon on demande à l'UImanager de Resume
             }
         }
     }

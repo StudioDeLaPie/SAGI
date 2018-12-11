@@ -45,9 +45,9 @@ public class GameManager : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadLevel(string levelName)
+    public void LoadNextLevel()
     {
-        int temp = currentLevel + 1;            
+        int temp = currentLevel + 1;
         NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + temp);
         currentLevel++;
     }
@@ -56,4 +56,6 @@ public class GameManager : NetworkBehaviour
     {
         NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);
     }
+
+
 }

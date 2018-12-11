@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -40,5 +41,23 @@ public class CustomNetworkManager : NetworkManager
     {
         //base.OnClientConnect(conn);
         _UIManager.DisableLoading();
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        SceneManager.LoadScene(NetworkManager.singleton.offlineScene);
+    }
+
+    public override void OnStopHost()
+    {
+        base.OnStopHost();
+        SceneManager.LoadScene(NetworkManager.singleton.offlineScene);
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        base.OnServerDisconnect(conn);
+        SceneManager.LoadScene(NetworkManager.singleton.offlineScene);
     }
 }
