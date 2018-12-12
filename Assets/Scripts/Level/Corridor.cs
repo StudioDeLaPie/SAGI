@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 
-public class Corridor : NetworkBehaviour//MonoBehaviour//
+public class Corridor : NetworkBehaviour
 {
     public struct PlayerPositionInCorridor
     {
@@ -24,6 +24,7 @@ public class Corridor : NetworkBehaviour//MonoBehaviour//
     private bool isLocked { get { return !isEntry && !isExit; } }
 
     [SerializeField] private Animator doorAnimator;
+    [SerializeField] private Light doorLight;
     public List<GameObject> deactivateIfLocked;
 
     private List<PlayerMovementController> playersInside;
@@ -47,7 +48,8 @@ public class Corridor : NetworkBehaviour//MonoBehaviour//
         {
             GetComponent<BoxCollider>().enabled = false;
             Destroy(GetComponent<NetworkAnimator>());
-            foreach(GameObject go in deactivateIfLocked)
+            Destroy(doorLight.gameObject);
+            foreach (GameObject go in deactivateIfLocked)
             {
                 go.SetActive(false);
             }
@@ -56,21 +58,34 @@ public class Corridor : NetworkBehaviour//MonoBehaviour//
         else
         {
             playersInside = new List<PlayerMovementController>();
+            if (isExit)
+                doorLight.color = new Color(90, 0, 0);
+            if (isEntry)
+                doorLight.color = new Color(0, 64, 168);
         }
     }
 
     #region Door Management
     public void OpenDoor()
     {
+
         ChangeDoorState(true);
     }
     public void CloseDoor()
     {
+
         ChangeDoorState(false);
     }
 
     private void ChangeDoorState(bool open)
     {
+        if (isExit)
+        {
+            if (open)
+                doorLight.color = new Color(0, 90, 0);
+            else
+                doorLight.color = new Color(90, 0, 0);
+        }
         doorAnimator.SetBool("open", open);
     }
     #endregion
@@ -104,7 +119,6 @@ public class Corridor : NetworkBehaviour//MonoBehaviour//
             playerInCor.direction.Set(-playerInCor.direction.x, playerInCor.direction.y, -playerInCor.direction.z);
             NetworkIdentity playerNetId = playerInCor.playerConnection.playerControllers[0].unetView;
             playerNetId.GetComponent<ConnectionPlayer>().RpcSetPositionAndDirection(transform.TransformPoint(playerInCor.position), transform.TransformPoint(playerInCor.direction));
-            //playerNetId.GetComponent<ConnectionPlayer>().RpcSetPositionAndDirection(Vector3.up, Vector3.forward);
         }
     }
 
