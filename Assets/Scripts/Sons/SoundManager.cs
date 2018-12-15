@@ -89,7 +89,7 @@ public class SoundManager : MonoBehaviour
     public void SetVolumeSFX(float volume)
     {
         sfxAudioMixer.SetFloat("VolumeSFX", volume.Remap(0, 1, -80, 0));
-        Debug.Log("SFX : " + volume.Remap(0, 1, -80, 0));
+        //Debug.Log("SFX : " + volume.Remap(0, 1, -80, 0));
     }
     #endregion
 

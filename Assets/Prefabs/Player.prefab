@@ -327,9 +327,6 @@ GameObject:
   - component: {fileID: 114490927797598898}
   - component: {fileID: 114874330557332906}
   - component: {fileID: 114156463462788842}
-  - component: {fileID: 114898969180250964}
-  - component: {fileID: 114043089964651774}
-  - component: {fileID: 114111727830690012}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1834,35 +1831,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114043089964651774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1417631472413956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841e0e2d0d94a464d95a982181a354f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stop: {fileID: 82990642000561512}
-  freeze: {fileID: 82465107652999776}
-  increase: {fileID: 82173874477487258}
-  decrease: {fileID: 82847986948319136}
---- !u!114 &114111727830690012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1417631472413956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2985d10e52f27a347a488d77afe6f286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _UIReticule: {fileID: 1119966564572472}
-  airControlImage: {fileID: 224496309968351254}
-  txtWeight: {fileID: 114496217374980432}
 --- !u!114 &114156463462788842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2083,7 +2051,7 @@ MonoBehaviour:
     clampVerticalRotation: 1
     MinimumX: -89
     MaximumX: 89
-    lockCursor: 0
+    lockCursor: 1
   airControl:
     currentAC: 0
     maxAC: 100
@@ -2235,7 +2203,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114898969180250964}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -2246,7 +2214,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114898969180250964}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -2257,7 +2225,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114111727830690012}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -2283,7 +2251,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114043089964651774}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -2296,23 +2264,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: ToggleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   respawnTime: 5
---- !u!114 &114898969180250964
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1417631472413956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeefb6fba5103294f9d702349f90a099, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impulse: {fileID: 82032090421185190}
-  expulse: {fileID: 82320376320815972}
-  deplacement: {fileID: 82841846037271866}
-  overlay: {fileID: 82429144052993154}
-  overlayClip: {fileID: 8300000, guid: 0fb59462dd49cd4428b35aa82a9f819e, type: 3}
-  overlaySuiteClip: {fileID: 8300000, guid: 1ffa8d03a6046f8418d99995ad743104, type: 3}
 --- !u!114 &114918570732562654
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -120,8 +120,7 @@ public class PlayerMovementController : NetworkBehaviour
     private void OnEnable()
     {
         mouseLook.Init(transform, cam.transform);
-
-        UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        //UIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
     }
 
 
@@ -165,7 +164,7 @@ public class PlayerMovementController : NetworkBehaviour
                 if (m_RigidBody.velocity.sqrMagnitude <
                     (movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
                 {
-                    GetComponent<SoundPlayerManager>().StartDeplacement();
+                   // GetComponent<SoundPlayerManager>().StartDeplacement();
                     //Debug.Log("Start");
                     m_RigidBody.AddForce(desiredMove, ForceMode.Impulse);
                 }
@@ -173,7 +172,7 @@ public class PlayerMovementController : NetworkBehaviour
         }
         else
         {
-            GetComponent<SoundPlayerManager>().StopDeplacement();
+            //GetComponent<SoundPlayerManager>().StopDeplacement();
             //Debug.Log("Stop");
         }
 

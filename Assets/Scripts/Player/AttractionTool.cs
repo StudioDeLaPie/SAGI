@@ -15,7 +15,7 @@ public class AttractionTool : NetworkBehaviour
     private BaseWeapon weapon;
     //private Weight playerWeight;
     //private PlayerMovementController movementController;
-    private SoundPlayerManager soundPlayerManager;
+    //private SoundPlayerManager soundPlayerManager;
 
 
     private void Start()
@@ -28,7 +28,7 @@ public class AttractionTool : NetworkBehaviour
         weapon = GetComponent<BaseWeapon>();
         //playerWeight = GetComponent<Weight>();
         //movementController = GetComponent<PlayerMovementController>();
-        soundPlayerManager = GetComponent<SoundPlayerManager>();
+        //soundPlayerManager = GetComponent<SoundPlayerManager>();
     }
 
     void Update()
@@ -50,14 +50,14 @@ public class AttractionTool : NetworkBehaviour
                     UpdateOverlay();
                     if (Input.GetButtonDown("Fire1"))
                     {
-                        soundPlayerManager.ShotExpulse();
+                        //soundPlayerManager.ShotExpulse();
                         //movementController.DisableAirControl(2);
                         //playerWeight.Attraction(hitNormal);
                         CmdRepulsion(touchedObject.GetComponent<NetworkIdentity>(), hitNormal);
                     }
                     else if (Input.GetButtonDown("Fire2"))
                     {
-                        soundPlayerManager.ShotImpulse();
+                        //soundPlayerManager.ShotImpulse();
                         //movementController.DisableAirControl(2);
                         //playerWeight.Repulsion(hitNormal);
                         CmdAttraction(touchedObject.GetComponent<NetworkIdentity>(), hitNormal);
@@ -66,20 +66,20 @@ public class AttractionTool : NetworkBehaviour
                 else
                 {
                     faceOverlay.SetActive(false);
-                    soundPlayerManager.StopOverlay();
+                    //soundPlayerManager.StopOverlay();
                 }
             }
             else
             {
                 faceOverlay.SetActive(false);
-                soundPlayerManager.StopOverlay();
+                //soundPlayerManager.StopOverlay();
             }
         }
         if (Input.GetButtonUp("AttractionTool"))
         {
             weapon.enabled = true;
             faceOverlay.SetActive(false);
-            soundPlayerManager.StopOverlay();
+            //soundPlayerManager.StopOverlay();
         }
     }
 
@@ -143,7 +143,7 @@ public class AttractionTool : NetworkBehaviour
         faceOverlay.transform.localScale = hit.transform.localScale;
 
         faceOverlay.SetActive(true);
-        soundPlayerManager.StartOverlay();
+       // soundPlayerManager.StartOverlay();
     }
 
     private void CalculateHitNormal()

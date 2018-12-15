@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Prototype.NetworkLobby;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
 
     private int currentLevel = 1;
     private string nameSceneMulti = "LevelMulti";
     private string nameSceneSolo = "Level";
-
+    
     [HideInInspector] public List<Corridor.PlayerPositionInCorridor> playersCoordinatesInCorridor = null;
 
     private bool multi;
@@ -42,7 +44,15 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void LoadNextLevel()
@@ -54,8 +64,6 @@ public class GameManager : NetworkBehaviour
 
     public void ResetLevel()
     {
-        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);
+        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);        
     }
-
-
 }

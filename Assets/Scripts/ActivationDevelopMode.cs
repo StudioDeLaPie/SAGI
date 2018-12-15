@@ -9,7 +9,14 @@ public class ActivationDevelopMode : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        if (FindObjectOfType<ActivationDevelopMode>() == null)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
