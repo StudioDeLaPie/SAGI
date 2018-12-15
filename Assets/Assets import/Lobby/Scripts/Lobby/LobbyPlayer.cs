@@ -297,24 +297,24 @@ namespace Prototype.NetworkLobby
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)
-        //public void OnDestroy()
-        //{
-        //    LobbyPlayerList._instance.RemovePlayer(this);
-        //    if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
+        public void OnDestroy()
+        {
+            LobbyPlayerList._instance.RemovePlayer(this);
+            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
 
-        //    int idx = System.Array.IndexOf(Colors, playerColor);
+            //int idx = System.Array.IndexOf(Colors, playerColor);
 
-        //    if (idx < 0)
-        //        return;
+            //if (idx < 0)
+            //    return;
 
-        //    for (int i = 0; i < _colorInUse.Count; ++i)
-        //    {
-        //        if (_colorInUse[i] == idx)
-        //        {//that color is already in use
-        //            _colorInUse.RemoveAt(i);
-        //            break;
-        //        }
-        //    }
-        //}
+            //for (int i = 0; i < _colorInUse.Count; ++i)
+            //{
+            //    if (_colorInUse[i] == idx)
+            //    {//that color is already in use
+            //        _colorInUse.RemoveAt(i);
+            //        break;
+            //    }
+            //}
+        }
     }
 }

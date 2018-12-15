@@ -272,15 +272,6 @@ Prefab:
       propertyPath: m_Name
       value: Corridor
       objectReference: {fileID: 0}
-    - target: {fileID: 4614242732109848, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -180.00002
-      objectReference: {fileID: 0}
-    - target: {fileID: 114778703405580438, guid: 330987ffa84fa6e48bfe804e3167de2a,
-        type: 2}
-      propertyPath: isEntry
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330987ffa84fa6e48bfe804e3167de2a, type: 2}
   m_IsPrefabAsset: 0
@@ -1031,8 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4096094708299744a87c038a690cb450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activated: 0
-  activateEvent:
+  activationEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

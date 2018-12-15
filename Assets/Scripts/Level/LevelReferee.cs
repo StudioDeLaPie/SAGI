@@ -25,7 +25,7 @@ public class LevelReferee : NetworkBehaviour
         {
             receptacle.activationEvent.AddListener(UpdateWinConditions);
         }
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager = GameManager.instance;
         multi = gameManager.Multi;
 
         StartCoroutine(OpenEntryCorridor());
@@ -73,7 +73,7 @@ public class LevelReferee : NetworkBehaviour
     private IEnumerator NextSceneCoroutine()
     {
         exitCorridor.CloseDoor();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         gameManager.playersCoordinatesInCorridor = exitCorridor.GetPlayersLocalCoordinates();
         gameManager.LoadNextLevel();
     }
@@ -83,6 +83,7 @@ public class LevelReferee : NetworkBehaviour
         bool everyoneReady = false;
         while (!everyoneReady)
         {
+            Debug.Log("En attente que tout le monde soit ready");
             everyoneReady = entryCorridor.IsReady() && exitCorridor.IsReady();
             if (gameManager.playersCoordinatesInCorridor != null)
             {
@@ -101,5 +102,6 @@ public class LevelReferee : NetworkBehaviour
             entryCorridor.SetPlayersLocalCoordinates(gameManager.playersCoordinatesInCorridor);
         }
         entryCorridor.OpenDoor();
+        Debug.Log("Porte ouverte");
     }
 }

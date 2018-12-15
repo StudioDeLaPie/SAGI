@@ -29,13 +29,14 @@ public class Corridor : NetworkBehaviour
 
     private List<PlayerMovementController> playersInside;
     [HideInInspector] public UnityEvent allPlayersInsideEvent;
-    private int nbPlayers = 1;
+    private bool doorClosed = false;
 
     public bool IsReady()
     {
         return doorAnimator.isActiveAndEnabled && ClientScene.ready;
     }
 
+    private int nbPlayers = 1;
     public void SetNbPlayers(int nbPlayers)
     {
         this.nbPlayers = nbPlayers;
@@ -68,12 +69,12 @@ public class Corridor : NetworkBehaviour
     #region Door Management
     public void OpenDoor()
     {
-
         ChangeDoorState(true);
+        doorClosed = false;
     }
     public void CloseDoor()
     {
-
+        doorClosed = true;
         ChangeDoorState(false);
     }
 
@@ -139,10 +140,13 @@ public class Corridor : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerMovementController controller = other.GetComponent<PlayerMovementController>();
-        if (controller != null)
+        if (!doorClosed)
         {
-            playersInside.Remove(controller);
+            PlayerMovementController controller = other.GetComponent<PlayerMovementController>();
+            if (controller != null)
+            {
+                playersInside.Remove(controller);
+            }
         }
     }
     #endregion

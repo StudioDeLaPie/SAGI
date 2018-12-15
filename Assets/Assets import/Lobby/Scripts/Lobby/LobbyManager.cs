@@ -204,7 +204,7 @@ namespace Prototype.NetworkLobby
                 StopHost();
             }
 
-
+            GameManager.instance.QuitGame();
             ChangeTo(mainMenuPanel);
         }
 
@@ -222,6 +222,7 @@ namespace Prototype.NetworkLobby
 
         public void StopServerClbk()
         {
+            GameManager.instance.QuitGame();
             StopServer();
             ChangeTo(mainMenuPanel);
         }

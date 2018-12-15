@@ -66,4 +66,11 @@ public class GameManager : MonoBehaviour
     {
         NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);        
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit Game");
+        playersCoordinatesInCorridor = null;
+        currentLevel = 1;
+    }
 }

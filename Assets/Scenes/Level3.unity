@@ -1777,7 +1777,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Attraction Tool
+  m_Text: Outil d'attraction
 --- !u!222 &1739873022
 CanvasRenderer:
   m_ObjectHideFlags: 0
