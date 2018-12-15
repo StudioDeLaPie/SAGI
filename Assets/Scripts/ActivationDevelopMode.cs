@@ -9,7 +9,7 @@ public class ActivationDevelopMode : MonoBehaviour
 
     private void Start()
     {
-        if (FindObjectOfType<ActivationDevelopMode>() == null)
+        if (FindObjectsOfType<ActivationDevelopMode>().Length <= 1)
         {
             DontDestroyOnLoad(gameObject);
         }

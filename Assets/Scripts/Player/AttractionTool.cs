@@ -83,6 +83,11 @@ public class AttractionTool : NetworkBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        Destroy(faceOverlay);
+    }
+
     [Command]
     private void CmdAttraction(NetworkIdentity touchedObjectId, Vector3 hitNormal)
     {
