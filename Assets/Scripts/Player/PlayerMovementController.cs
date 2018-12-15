@@ -12,6 +12,8 @@ public class PlayerMovementController : NetworkBehaviour
         public float ForwardSpeed = 65;   // Speed when walking forward
         public float StrafeSpeed = 45;    // Speed when walking sideways or backwards
         public float JumpForce = 150;
+        
+
         [HideInInspector] public float CurrentTargetSpeed;
 
         public void UpdateDesiredTargetSpeed(Vector2 input)
@@ -106,6 +108,8 @@ public class PlayerMovementController : NetworkBehaviour
     private bool m_Jump, m_Jumping, m_IsGrounded, m_IsRoofed, m_Jumpable;
     private bool m_PreviouslyOnPlane; //Stocke si on était précédemment sur un sol, le plafond ou un objet duquel on peut sauter
 
+    public RectTransform _UIAirControl;//A ENLEVER (CACA) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 8===D
+
     private Weight playerWeight;
     [SerializeField, Range(0f, 1f)] private float decelerationPercentage = 0.1f;
 
@@ -130,6 +134,9 @@ public class PlayerMovementController : NetworkBehaviour
             return;
 
         RotateView();
+
+        //A ENLEVER !!!!!!!
+        _UIAirControl.localScale = new Vector3(_UIAirControl.localScale.x, airControl.currentAC/100, _UIAirControl.localScale.z);
 
         if (Input.GetButtonDown("Jump") && !m_Jump)
         {

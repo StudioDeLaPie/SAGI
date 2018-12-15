@@ -13,7 +13,7 @@ namespace Prototype.NetworkLobby
         public RectTransform lobbyPanel;
 
         public InputField ipInput;
-        public InputField matchNameInput;
+        //public InputField matchNameInput;
 
         public void OnEnable()
         {
@@ -22,13 +22,17 @@ namespace Prototype.NetworkLobby
             ipInput.onEndEdit.RemoveAllListeners();
             ipInput.onEndEdit.AddListener(onEndEditIP);
 
-            matchNameInput.onEndEdit.RemoveAllListeners();
-            matchNameInput.onEndEdit.AddListener(onEndEditGameName);
+            //matchNameInput.onEndEdit.RemoveAllListeners();
+            //matchNameInput.onEndEdit.AddListener(onEndEditGameName);
         }
 
         public void OnClickHost()
         {
             lobbyManager.GetComponent<Variables>().tutorielMode = false;
+            lobbyManager.maxPlayers = 2;
+            lobbyManager.minPlayers = 2;
+            lobbyManager.prematchCountdown = 3;
+            lobbyManager.lobbyPlayerPrefab = lobbyManager.GetComponent<Variables>().playerInfosMulti;           
             lobbyManager.StartHost();
         }
 
@@ -37,6 +41,8 @@ namespace Prototype.NetworkLobby
             lobbyManager.GetComponent<Variables>().tutorielMode = true;
             lobbyManager.maxPlayers = 1;
             lobbyManager.minPlayers = 1;
+            lobbyManager.prematchCountdown = 0;
+            lobbyManager.lobbyPlayerPrefab = lobbyManager.GetComponent<Variables>().playerInfosSolo;
             lobbyManager.StartHost();
         }
 
@@ -63,22 +69,22 @@ namespace Prototype.NetworkLobby
             lobbyManager.SetServerInfo("Dedicated Server", lobbyManager.networkAddress);
         }
 
-        public void OnClickCreateMatchmakingGame()
-        {
-            lobbyManager.StartMatchMaker();
-            lobbyManager.matchMaker.CreateMatch(
-                matchNameInput.text,
-                (uint)lobbyManager.maxPlayers,
-                true,
-				"", "", "", 0, 0,
-				lobbyManager.OnMatchCreate);
+    //    public void OnClickCreateMatchmakingGame()
+    //    {
+    //        lobbyManager.StartMatchMaker();
+    //        lobbyManager.matchMaker.CreateMatch(
+    //            matchNameInput.text,
+    //            (uint)lobbyManager.maxPlayers,
+    //            true,
+				//"", "", "", 0, 0,
+				//lobbyManager.OnMatchCreate);
 
-            lobbyManager.backDelegate = lobbyManager.StopHost;
-            lobbyManager._isMatchmaking = true;
-            lobbyManager.DisplayIsConnecting();
+    //        lobbyManager.backDelegate = lobbyManager.StopHost;
+    //        lobbyManager._isMatchmaking = true;
+    //        lobbyManager.DisplayIsConnecting();
 
-            lobbyManager.SetServerInfo("Matchmaker Host", lobbyManager.matchHost);
-        }
+    //        lobbyManager.SetServerInfo("Matchmaker Host", lobbyManager.matchHost);
+    //    }
 
         public void OnClickOpenServerList()
         {
@@ -99,7 +105,7 @@ namespace Prototype.NetworkLobby
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                OnClickCreateMatchmakingGame();
+                //OnClickCreateMatchmakingGame();
             }
         }
 

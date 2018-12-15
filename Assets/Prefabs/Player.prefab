@@ -207,7 +207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1327114488189348
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,6 +2057,7 @@ MonoBehaviour:
     maxAC: 100
     useMultiplier: 10
     reloadMultiplier: 150
+  _UIAirControl: {fileID: 224496309968351254}
   decelerationPercentage: 0.1
 --- !u!114 &114700656207540720
 MonoBehaviour:
