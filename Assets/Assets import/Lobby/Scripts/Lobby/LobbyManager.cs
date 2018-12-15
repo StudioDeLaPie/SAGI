@@ -254,8 +254,9 @@ namespace Prototype.NetworkLobby
             {
                 this.maxPlayers = 2;
                 this.minPlayers = 2;
+                GameManager.instance.Multi = true;
                 ChangeTo(lobbyPanel);
-                this.playScene = GetComponent<Variables>().sceneMulti.name;
+                this.playScene = GetComponent<Variables>().sceneMulti;
                 backDelegate = StopHostClbk;
                 SetServerInfo("Hosting", networkAddress);
             }
@@ -263,8 +264,9 @@ namespace Prototype.NetworkLobby
             {
                 this.maxPlayers = 1;
                 this.minPlayers = 1;
+                GameManager.instance.Multi = false;
                 ChangeTo(lobbyPanel);
-                this.playScene = GetComponent<Variables>().sceneTuto.name;
+                this.playScene = GetComponent<Variables>().sceneTuto;
                 backDelegate = StopHostClbk;
                 SetServerInfo("Tutoriel", networkAddress);
             }

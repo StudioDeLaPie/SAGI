@@ -4545,8 +4545,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorielMode: 0
-  sceneTuto: {fileID: 102900000, guid: 8f8b8642d9c289741b637c9a36fa04a5, type: 3}
-  sceneMulti: {fileID: 102900000, guid: 5c8e467042bb58b41a5bd280480ca826, type: 3}
+  sceneTuto:
+    sceneAsset: {fileID: 102900000, guid: 8f8b8642d9c289741b637c9a36fa04a5, type: 3}
+    sceneName: Scenes/Level1
+  sceneMulti:
+    sceneAsset: {fileID: 102900000, guid: 5c8e467042bb58b41a5bd280480ca826, type: 3}
+    sceneName: Scenes/LevelMulti1
   playerInfosSolo: {fileID: 114427425468371238, guid: a3dae5d79f8cad240a7c99f2d2ce5a25,
     type: 2}
   playerInfosMulti: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997, type: 2}

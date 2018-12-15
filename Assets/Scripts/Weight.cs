@@ -56,7 +56,7 @@ public class Weight : NetworkBehaviour
         RpcSetKinematic(false);
         currentWeight++;
         currentWeight = Mathf.Clamp(currentWeight, minWeight, maxWeight);
-        RpcChangeWeightSound(true);
+        //RpcChangeWeightSound(true);
     }
 
     [Command]
@@ -65,7 +65,7 @@ public class Weight : NetworkBehaviour
         RpcSetKinematic(false);
         currentWeight--;
         currentWeight = Mathf.Clamp(currentWeight, minWeight, maxWeight);
-        RpcChangeWeightSound(false);
+        //RpcChangeWeightSound(false);
     }
 
     [Command]
@@ -87,14 +87,14 @@ public class Weight : NetworkBehaviour
     {
         rb.isKinematic = true;
         rb.isKinematic = false;
-        GetComponent<WeightSoundManager>().ShotStop();
+        //GetComponent<WeightSoundManager>().ShotStop();
     }
 
     [ClientRpc]
     private void RpcFreeze()
     {
         rb.isKinematic = true;
-        GetComponent<WeightSoundManager>().ShotFreeze();
+        //GetComponent<WeightSoundManager>().ShotFreeze();
     }
 
     [ClientRpc]
@@ -103,14 +103,14 @@ public class Weight : NetworkBehaviour
         rb.isKinematic = isKinematic;
     }
 
-    [ClientRpc]
-    private void RpcChangeWeightSound(bool increased)
-    {
-        if (increased)
-            GetComponent<WeightSoundManager>().ShotIncreasse();
-        else
-            GetComponent<WeightSoundManager>().ShotDecreasse();
-    }
+    //[ClientRpc]
+    //private void RpcChangeWeightSound(bool increased)
+    //{
+    //    if (increased)
+    //        GetComponent<WeightSoundManager>().ShotIncreasse();
+    //    else
+    //        GetComponent<WeightSoundManager>().ShotDecreasse();
+    //}
 
     /// <summary>
     /// Demande a l'entite de s'appliquer une force d'ejection dans la direction donnee

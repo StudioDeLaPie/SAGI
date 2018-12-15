@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private int currentLevel = 1;
     private string nameSceneMulti = "LevelMulti";
     private string nameSceneSolo = "Level";
-    
+
     [HideInInspector] public List<Corridor.PlayerPositionInCorridor> playersCoordinatesInCorridor = null;
 
     private bool multi;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
-        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);        
+        NetworkManager.singleton.ServerChangeScene((multi ? nameSceneMulti : nameSceneSolo) + currentLevel);
     }
 
     public void QuitGame()

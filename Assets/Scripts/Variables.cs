@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
+using Utilities;
+
 
 public class Variables : MonoBehaviour {
 
     public bool tutorielMode;    
-    public SceneAsset sceneTuto;
-    public SceneAsset sceneMulti;
+    public SceneField sceneTuto;
+    public SceneField sceneMulti;
     public NetworkLobbyPlayer playerInfosSolo;
     public NetworkLobbyPlayer playerInfosMulti;
 }
