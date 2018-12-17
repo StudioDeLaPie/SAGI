@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Prototype.NetworkLobby;
 
 public class LevelReferee : NetworkBehaviour
 {
@@ -81,19 +82,55 @@ public class LevelReferee : NetworkBehaviour
     private IEnumerator OpenEntryCorridor()
     {
         bool everyoneReady = false;
-        while (!everyoneReady)
+        float startLoadingTime = Time.time;
+        while (!everyoneReady || Time.time < startLoadingTime + 3)
         {
             Debug.Log("En attente que tout le monde soit ready");
             everyoneReady = entryCorridor.IsReady() && exitCorridor.IsReady();
-            if (gameManager.playersCoordinatesInCorridor != null)
+
+            List<PlayerController> playersController = new List<PlayerController>();
+            foreach (ConnectionPlayer player in FindObjectsOfType<ConnectionPlayer>())
             {
-                foreach (Corridor.PlayerPositionInCorridor player in gameManager.playersCoordinatesInCorridor)
+                playersController.Add(player.GetComponent<NetworkIdentity>().connectionToClient.playerControllers[0]);
+            }
+            //Debug.Log("Multi : " + multi);
+            //Debug.Log("Nbplayers Lobby : " + LobbyManager.s_Singleton._playerNumber);
+            //Debug.Log("Nb controllers récupérés : " + playersController.Count);
+
+            if ((multi && playersController.Count == 2) || (!multi && playersController.Count == 1))
+            {
+                //    Debug.Log("Bon nombre de joueurs connectés");
+                //    for (int i = 0; i < playersController.Count; i++)
+                //    {
+                //        Debug.Log("Test joueur " + i);
+                //        bool estPresentDansLaListe = false;
+                //        foreach (NetworkConnection clientReady in LobbyManager.s_Singleton.clientsReady)
+                //        {
+                //            Debug.Log("Compararaison : clientReady " + clientReady.connectionId + "    Client en test : " + playersController[i].unetView.connectionToClient.connectionId);
+                //            if (!estPresentDansLaListe)
+                //            {
+                //                estPresentDansLaListe = clientReady.connectionId == playersController[i].unetView.connectionToClient.connectionId;
+                //                Debug.Log("client " + clientReady.connectionId + " est présent dans la liste des readys : " + estPresentDansLaListe);
+                //            }
+                //        }
+                //        if (!estPresentDansLaListe)
+                //            everyoneReady = false;
+                //    }
+                if (gameManager.playersCoordinatesInCorridor != null)
                 {
-                    if (everyoneReady)
+                    foreach (Corridor.PlayerPositionInCorridor player in gameManager.playersCoordinatesInCorridor)
                     {
-                        everyoneReady = player.playerConnection.isReady;
+                        if (everyoneReady)
+                        {
+                            everyoneReady = player.playerConnection.isReady;
+                        }
                     }
                 }
+            }
+            else
+            {
+                everyoneReady = false;
+                Debug.Log("Pas le bon nombre de joueurs");
             }
             yield return null;
         }
@@ -102,6 +139,7 @@ public class LevelReferee : NetworkBehaviour
             entryCorridor.SetPlayersLocalCoordinates(gameManager.playersCoordinatesInCorridor);
         }
         entryCorridor.OpenDoor();
+        exitCorridor.CloseDoor();
         Debug.Log("Porte ouverte");
     }
 }

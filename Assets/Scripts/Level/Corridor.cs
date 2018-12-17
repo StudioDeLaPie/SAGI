@@ -36,7 +36,7 @@ public class Corridor : NetworkBehaviour
         return doorAnimator.isActiveAndEnabled && ClientScene.ready;
     }
 
-    private int nbPlayers = 1;
+    private int nbPlayers;
     public void SetNbPlayers(int nbPlayers)
     {
         this.nbPlayers = nbPlayers;
@@ -59,18 +59,18 @@ public class Corridor : NetworkBehaviour
         else
         {
             playersInside = new List<PlayerMovementController>();
-            if (isExit)
-                doorLight.color = new Color(90, 0, 0);
-            if (isEntry)
-                doorLight.color = new Color(0, 64, 168);
+            //if (isExit)
+            //    RpcDoorLightColor(90, 0, 0);
+            //if (isEntry)
+            //    RpcDoorLightColor(0, 64, 168);
         }
     }
 
     #region Door Management
     public void OpenDoor()
     {
-        ChangeDoorState(true);
         doorClosed = false;
+        ChangeDoorState(true);
     }
     public void CloseDoor()
     {
@@ -83,11 +83,21 @@ public class Corridor : NetworkBehaviour
         if (isExit)
         {
             if (open)
-                doorLight.color = new Color(0, 90, 0);
+                RpcDoorLightColor(0, 90, 0);
             else
-                doorLight.color = new Color(90, 0, 0);
+                RpcDoorLightColor(90, 0, 0);
+        }
+        if (isEntry)
+        {
+            RpcDoorLightColor(0, 64, 168);
         }
         doorAnimator.SetBool("open", open);
+    }
+
+    [ClientRpc]
+    private void RpcDoorLightColor(int r, int g, int b)
+    {
+        doorLight.color = new Color(r, g, b);
     }
     #endregion
 
@@ -128,7 +138,7 @@ public class Corridor : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerMovementController controller = other.GetComponent<PlayerMovementController>();
-        if (controller != null)
+        if (controller != null && !playersInside.Contains(controller))
         {
             playersInside.Add(controller);
             if (AllPlayersInside())

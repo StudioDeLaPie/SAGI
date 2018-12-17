@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        multi = LobbyManager.s_Singleton.multi;
+    }
+
     public void LoadNextLevel()
     {
         multi = LobbyManager.s_Singleton.multi;
