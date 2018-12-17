@@ -30,6 +30,7 @@ namespace Prototype.NetworkLobby
         {
             lobbyManager.GetComponent<Variables>().tutorielMode = false;
             lobbyManager.maxPlayers = 2;
+            lobbyManager.maxPlayersPerConnection = 2;
             lobbyManager.minPlayers = 2;
             lobbyManager.prematchCountdown = 3;
             lobbyManager.lobbyPlayerPrefab = lobbyManager.GetComponent<Variables>().playerInfosMulti;
@@ -40,6 +41,7 @@ namespace Prototype.NetworkLobby
         {
             lobbyManager.GetComponent<Variables>().tutorielMode = true;
             lobbyManager.maxPlayers = 1;
+            lobbyManager.maxPlayersPerConnection = 1;
             lobbyManager.minPlayers = 1;
             lobbyManager.prematchCountdown = 0;
             lobbyManager.lobbyPlayerPrefab = lobbyManager.GetComponent<Variables>().playerInfosSolo;

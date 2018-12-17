@@ -9,5 +9,5 @@ public class Variables : MonoBehaviour {
     public string sceneTuto;
     public string sceneMulti;
     public NetworkLobbyPlayer playerInfosSolo;
-    public NetworkLobbyPlayer playerInfosMulti;
+    public NetworkLobbyPlayer playerInfosMulti;    
 }
