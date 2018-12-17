@@ -61,6 +61,11 @@ namespace Prototype.NetworkLobby
             lobbyManager.SetServerInfo("Connecting...", lobbyManager.networkAddress);
         }
 
+        public void OnClickQuit()
+        {
+            Application.Quit();
+        }
+
         public void OnClickDedicated()
         {
             lobbyManager.ChangeTo(null);
