@@ -54,6 +54,7 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+        public bool multi = false;
 
         void Start()
         {
@@ -253,8 +254,8 @@ namespace Prototype.NetworkLobby
             if (!GetComponent<Variables>().tutorielMode)
             {
                 this.maxPlayers = 2;
-                this.minPlayers = 2;
-                GameManager.instance.Multi = true;
+                this.minPlayers = 2;                
+                multi = true;                
                 ChangeTo(lobbyPanel);
                 this.playScene = GetComponent<Variables>().sceneMulti;
                 backDelegate = StopHostClbk;
@@ -264,7 +265,7 @@ namespace Prototype.NetworkLobby
             {
                 this.maxPlayers = 1;
                 this.minPlayers = 1;
-                GameManager.instance.Multi = false;
+                multi = false;
                 ChangeTo(lobbyPanel);
                 this.playScene = GetComponent<Variables>().sceneTuto;
                 backDelegate = StopHostClbk;

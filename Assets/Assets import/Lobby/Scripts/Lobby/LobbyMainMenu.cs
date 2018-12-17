@@ -32,7 +32,7 @@ namespace Prototype.NetworkLobby
             lobbyManager.maxPlayers = 2;
             lobbyManager.minPlayers = 2;
             lobbyManager.prematchCountdown = 3;
-            lobbyManager.lobbyPlayerPrefab = lobbyManager.GetComponent<Variables>().playerInfosMulti;           
+            lobbyManager.lobbyPlayerPrefab = lobbyManager.GetComponent<Variables>().playerInfosMulti;
             lobbyManager.StartHost();
         }
 

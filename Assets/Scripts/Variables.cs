@@ -6,8 +6,8 @@ using Utilities;
 public class Variables : MonoBehaviour {
 
     public bool tutorielMode;    
-    public SceneField sceneTuto;
-    public SceneField sceneMulti;
+    public string sceneTuto;
+    public string sceneMulti;
     public NetworkLobbyPlayer playerInfosSolo;
     public NetworkLobbyPlayer playerInfosMulti;
 }

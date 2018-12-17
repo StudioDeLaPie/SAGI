@@ -8,7 +8,7 @@ using Utilities;
 
 public class LoadAdditivScene : MonoBehaviour
 {
-    [SerializeField] private SceneField newScene;
+    [SerializeField] private string newScene;
     public GameManager gm;
 
     void Start()
