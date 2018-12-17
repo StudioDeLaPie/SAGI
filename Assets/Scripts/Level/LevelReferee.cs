@@ -83,7 +83,7 @@ public class LevelReferee : NetworkBehaviour
     {
         bool everyoneReady = false;
         float startLoadingTime = Time.time;
-        while (!everyoneReady || Time.time < startLoadingTime + 3)
+        while (!everyoneReady)
         {
             Debug.Log("En attente que tout le monde soit ready");
             everyoneReady = entryCorridor.IsReady() && exitCorridor.IsReady();
@@ -138,8 +138,12 @@ public class LevelReferee : NetworkBehaviour
         {
             entryCorridor.SetPlayersLocalCoordinates(gameManager.playersCoordinatesInCorridor);
         }
+
+        while (Time.time < startLoadingTime + 2)
+        {
+            yield return null; // On attend 2 sec avant d'ouvrir
+        }
         entryCorridor.OpenDoor();
         exitCorridor.CloseDoor();
-        Debug.Log("Porte ouverte");
     }
 }

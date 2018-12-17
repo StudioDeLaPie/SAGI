@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class CubeAuthority : NetworkBehaviour {
 
+    private float lastHit;
+    private float cooldown = 0.5f;
+    private Coroutine coroutineReset;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -12,6 +15,11 @@ public class CubeAuthority : NetworkBehaviour {
         if (collision.transform.tag == "Player" && isServer)
         {
             CmdAssignNetworkAuthority(GetComponent<NetworkIdentity>(), collision.transform.GetComponent<NetworkIdentity>());
+            if (coroutineReset != null)
+            {
+                Debug.Log("Arrêt coroutine");
+                StopCoroutine(coroutineReset);
+            }
         }
     }
 
@@ -31,5 +39,31 @@ public class CubeAuthority : NetworkBehaviour {
             // Ajout du demandeur comme proprio
             cubeId.AssignClientAuthority(clientId.connectionToClient);
         }
+    }
+
+    [Command]
+    public void CmdRemoveAuthority(NetworkIdentity cubeId)
+    {
+        cubeId.RemoveClientAuthority(cubeId.clientAuthorityOwner);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag == "Player" && isServer)
+        {
+            lastHit = Time.time;
+            coroutineReset = StartCoroutine(ResetAuthority());
+        }
+    }
+
+    private IEnumerator ResetAuthority()
+    {
+        while (lastHit + cooldown > Time.time)
+        {
+            Debug.Log("Attente avant de supprimer l'authorité");
+            yield return null;
+        }
+        Debug.Log("Suppression de l'authorité");
+        CmdRemoveAuthority(GetComponent<NetworkIdentity>());
     }
 }
