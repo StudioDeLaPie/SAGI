@@ -1857,7 +1857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 11265
+    m_Bits: 10241
   firePoint: {fileID: 4396602368286098}
   prefabFaceOverlay: {fileID: 1135376714448996, guid: 0bb976a12457ac547b1bf4554dffdbca,
     type: 2}
@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 11265
+    m_Bits: 10241
   cooldown: 0.1
   firePoint: {fileID: 4396602368286098}
 --- !u!114 &114490927797598898
