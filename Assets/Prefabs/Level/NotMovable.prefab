@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65256232128154992}
   m_Layer: 13
   m_Name: NotMovable
-  m_TagString: Jumpable
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
