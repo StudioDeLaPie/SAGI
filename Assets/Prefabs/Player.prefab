@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 4536600789463092}
   - component: {fileID: 20481984945253466}
   - component: {fileID: 81657797945021030}
+  - component: {fileID: 114401362086120186}
   m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
@@ -651,7 +652,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417631472413956}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 7.98, y: 0.87, z: 2.58}
+  m_LocalPosition: {x: -17.44252, y: 1.5, z: 19.223616}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4580886654752152}
@@ -824,8 +825,8 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -1931,6 +1932,18 @@ MonoBehaviour:
     m_Bits: 10241
   cooldown: 0.1
   firePoint: {fileID: 4396602368286098}
+--- !u!114 &114401362086120186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1248170145769092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 43a05fb479e21a142a1c78c492c97ce4, type: 2}
 --- !u!114 &114490927797598898
 MonoBehaviour:
   m_ObjectHideFlags: 1
