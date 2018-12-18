@@ -4633,7 +4633,7 @@ GameObject:
   - component: {fileID: 1840017934}
   - component: {fileID: 1840017933}
   - component: {fileID: 1840017932}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ObjectActivator
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
