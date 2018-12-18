@@ -1584,6 +1584,10 @@ Prefab:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1494025314522964, guid: 80c9b7de0dd3bf24ebcf4e0daae41082, type: 2}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80c9b7de0dd3bf24ebcf4e0daae41082, type: 2}
   m_IsPrefabAsset: 0
