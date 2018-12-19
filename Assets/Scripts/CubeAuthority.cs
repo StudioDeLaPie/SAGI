@@ -17,7 +17,7 @@ public class CubeAuthority : NetworkBehaviour {
             CmdAssignNetworkAuthority(GetComponent<NetworkIdentity>(), collision.transform.GetComponent<NetworkIdentity>());
             if (coroutineReset != null)
             {
-                Debug.Log("Arrêt coroutine");
+                //Debug.Log("Arrêt coroutine");
                 StopCoroutine(coroutineReset);
             }
         }
@@ -60,10 +60,10 @@ public class CubeAuthority : NetworkBehaviour {
     {
         while (lastHit + cooldown > Time.time)
         {
-            Debug.Log("Attente avant de supprimer l'authorité");
+            //Debug.Log("Attente avant de supprimer l'authorité");
             yield return null;
         }
-        Debug.Log("Suppression de l'authorité");
+        //Debug.Log("Suppression de l'authorité");
         CmdRemoveAuthority(GetComponent<NetworkIdentity>());
     }
 }
