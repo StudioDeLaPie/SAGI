@@ -62,10 +62,17 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        multi = LobbyManager.s_Singleton.multi;
-        int temp = currentLevel + 1;
-        NetworkManager.singleton.ServerChangeScene((Multi ? nameSceneMulti : nameSceneSolo) + temp);
-        currentLevel++;
+        if (currentLevel != 5)
+        {
+            multi = LobbyManager.s_Singleton.multi;
+            int temp = currentLevel + 1;
+            NetworkManager.singleton.ServerChangeScene((Multi ? nameSceneMulti : nameSceneSolo) + temp);
+            currentLevel++;
+        }
+        else
+        {
+            NetworkManager.singleton.ServerChangeScene(("FinalScreen");
+        }
     }
 
     public void ResetLevel()
