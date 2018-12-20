@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            NetworkManager.singleton.ServerChangeScene(("FinalScreen");
+            NetworkManager.singleton.ServerChangeScene(("FinalScreen"));
         }
     }
 
