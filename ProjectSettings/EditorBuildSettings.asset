@@ -8,18 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OfflineScene2.unity
     guid: 7eeca38de553c3e40a066b6423c38821
-  - enabled: 0
-    path: Assets/Scenes/SceneOffline.unity
-    guid: af48539e07aa32540be8ed0862b8faac
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 8f8b8642d9c289741b637c9a36fa04a5
   - enabled: 1
     path: Assets/Scenes/Level2.unity
-    guid: de7b8101937dbd1448cde92900cb06ab
+    guid: 021f0ec85f8f0c44e8e24eb2bbcf1cbf
   - enabled: 1
     path: Assets/Scenes/Level3.unity
-    guid: 021f0ec85f8f0c44e8e24eb2bbcf1cbf
+    guid: de7b8101937dbd1448cde92900cb06ab
   - enabled: 1
     path: Assets/Scenes/Level4.unity
     guid: 778537a280947564784b0a20dbcb96ca
@@ -44,10 +41,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalScreen.unity
     guid: 90292118e35ce4b7eb6b56494ae83a05
-  - enabled: 0
-    path: Assets/Scenes/LevelMulti6.unity
-    guid: 552298d90b95bdb4a89c4f0cc729cf0f
-  - enabled: 0
-    path: Assets/Scenes/LevelMulti7.unity
-    guid: dddd548558e3d5c46a332942a60a3b7f
   m_configObjects: {}
