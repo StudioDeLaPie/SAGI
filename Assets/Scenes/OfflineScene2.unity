@@ -4866,7 +4866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorielMode: 0
   sceneTuto: Level1
-  sceneMulti: LevelMulti1
+  sceneMulti: Miniature
   playerInfosSolo: {fileID: 114427425468371238, guid: a3dae5d79f8cad240a7c99f2d2ce5a25,
     type: 2}
   playerInfosMulti: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997, type: 2}
